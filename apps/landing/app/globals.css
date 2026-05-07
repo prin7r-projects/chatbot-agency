@@ -1,0 +1,280 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ---------------------------------------------------------------------------
+   [DISPATCH_GLOBALS] Editorial-dispatch baseline.
+   The palette + type system are documented in /DESIGN.md sections 4-6.
+   Five colors, three families, square edges, one shadow, one animation.
+   --------------------------------------------------------------------------- */
+
+@import url("https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,900&family=Fraunces:ital,opsz,wght@1,9..144,400&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap");
+
+:root {
+  --cream: #F4EDE0;
+  --cream-2: #EAE0CD;
+  --forest: #0F2A26;
+  --graphite: #1F2422;
+  --linen: #857C71;
+  --carmine: #C24656;
+  --cedar: #A07A2C;
+}
+
+html {
+  background: var(--cream);
+  color: var(--forest);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  font-family: Inter, ui-sans-serif, system-ui, sans-serif;
+  font-size: 16px;
+  line-height: 1.55;
+  letter-spacing: -0.005em;
+  background: var(--cream);
+  color: var(--forest);
+}
+
+::selection {
+  background: var(--carmine);
+  color: var(--cream);
+}
+
+/* Focus ring — visible carmine outline, 2px offset. */
+:focus-visible {
+  outline: 1.5px solid var(--carmine);
+  outline-offset: 2px;
+}
+
+/* Skip-to-content link, hidden until focused. */
+.skip-link {
+  position: absolute;
+  left: -9999px;
+  top: 8px;
+  background: var(--forest);
+  color: var(--cream);
+  padding: 8px 12px;
+  font-family: "JetBrains Mono", monospace;
+  font-size: 11px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  z-index: 100;
+}
+.skip-link:focus { left: 8px; }
+
+/* --- Local components ---------------------------------------------------- */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--forest);
+  color: var(--cream);
+  font-family: Inter, sans-serif;
+  font-weight: 500;
+  font-size: 15px;
+  padding: 14px 22px;
+  border-radius: 0;
+  border: 1px solid var(--forest);
+  text-decoration: none;
+  transition: background 80ms linear, border-color 80ms linear, color 80ms linear;
+  cursor: pointer;
+}
+.btn:hover { background: var(--carmine); border-color: var(--carmine); color: var(--cream); }
+.btn:disabled { opacity: .5; cursor: not-allowed; }
+
+.btn-ghost {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: transparent;
+  color: var(--forest);
+  font-family: Inter, sans-serif;
+  font-weight: 500;
+  font-size: 15px;
+  padding: 14px 22px;
+  border-radius: 0;
+  border: 1px solid var(--forest);
+  text-decoration: none;
+  transition: background 80ms linear, color 80ms linear;
+  cursor: pointer;
+}
+.btn-ghost:hover { background: var(--forest); color: var(--cream); }
+
+.kicker {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 11px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--linen);
+}
+
+.eyebrow-rule {
+  display: block;
+  width: 32px;
+  height: 1.5px;
+  background: var(--carmine);
+  margin: 16px 0;
+}
+
+.dispatch-frame {
+  background: var(--cream);
+  border: 1px solid rgba(15, 42, 38, .18);
+  position: relative;
+}
+.dispatch-frame::after {
+  content: "";
+  position: absolute;
+  inset: 8px;
+  border: 1px solid rgba(15, 42, 38, .06);
+  pointer-events: none;
+}
+
+.kickoff-stamp {
+  background: var(--cream-2);
+  border: 1px solid rgba(15, 42, 38, .18);
+  padding: 14px 18px;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-family: "JetBrains Mono", monospace;
+  font-size: 11px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--graphite);
+}
+
+.pulse-dot {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  background: var(--cedar);
+  border-radius: 50%;
+  animation: pulse 1.6s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: .35; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pulse-dot { animation: none; opacity: 1; }
+}
+
+.monoglyph {
+  font-family: "JetBrains Mono", monospace;
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  text-transform: lowercase;
+  color: var(--forest);
+}
+
+.hairline {
+  height: 1px;
+  background: rgba(15, 42, 38, .12);
+}
+
+.carmine-rule {
+  height: 2px;
+  background: var(--carmine);
+}
+
+.section {
+  border-bottom: 1px solid rgba(15, 42, 38, .12);
+}
+
+/* Tier card */
+.tier {
+  background: var(--cream);
+  border: 1px solid rgba(15, 42, 38, .18);
+  padding: 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.tier.featured {
+  background: var(--cream-2);
+  border-color: var(--carmine);
+}
+.tier .tier-name {
+  font-family: Fraunces, serif;
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 1.1;
+}
+.tier .tier-price {
+  font-family: Fraunces, serif;
+  font-weight: 900;
+  font-size: 32px;
+  line-height: 1.05;
+  letter-spacing: -0.012em;
+}
+.tier .tier-mo {
+  font-family: Inter, sans-serif;
+  font-weight: 400;
+  font-size: 18px;
+  color: var(--graphite);
+}
+.tier ul.tier-features {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+}
+.tier ul.tier-features li {
+  font-size: 14.5px;
+  color: var(--graphite);
+  padding: 9px 0;
+  border-top: 1px dashed rgba(15, 42, 38, .14);
+}
+.tier ul.tier-features li:first-child { border-top: 0; }
+
+/* FAQ details */
+details.faq {
+  border-top: 1px solid rgba(15, 42, 38, .12);
+  padding: 22px 0;
+}
+details.faq:last-child { border-bottom: 1px solid rgba(15, 42, 38, .12); }
+details.faq summary {
+  list-style: none;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: Fraunces, serif;
+  font-weight: 600;
+  font-size: 21px;
+  color: var(--forest);
+}
+details.faq summary::-webkit-details-marker { display: none; }
+details.faq summary::after {
+  content: "+";
+  font-family: "JetBrains Mono", monospace;
+  font-size: 22px;
+  color: var(--carmine);
+  transition: transform 120ms linear;
+}
+details.faq[open] summary::after { content: "−"; }
+details.faq p {
+  margin-top: 14px;
+  font-size: 16px;
+  color: var(--graphite);
+  max-width: 64ch;
+}
+
+/* Subtle paper grain on hero — 2% opacity SVG noise. */
+.grain {
+  position: relative;
+  isolation: isolate;
+}
+.grain::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='1' stitchTiles='stitch'/></filter><rect width='160' height='160' filter='url(%23n)' opacity='0.04'/></svg>");
+  z-index: -1;
+}

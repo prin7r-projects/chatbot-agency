@@ -1,0 +1,286 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Dispatch — pitch deck</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,900&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<style>
+:root{
+  --cream:#F4EDE0;
+  --cream-2:#EAE0CD;
+  --forest:#0F2A26;
+  --graphite:#1F2422;
+  --linen:#857C71;
+  --carmine:#C24656;
+  --cedar:#A07A2C;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{background:var(--cream);color:var(--forest);font-family:Inter,system-ui,sans-serif;font-size:16px;line-height:1.55}
+body{padding:48px 0}
+.deck{max-width:980px;margin:0 auto;padding:0 32px}
+.slide{
+  background:var(--cream);
+  border:1px solid rgba(15,42,38,.12);
+  margin-bottom:24px;
+  padding:56px 56px 64px;
+  page-break-after:always;
+  position:relative;
+  min-height:560px;
+  display:flex;flex-direction:column;
+}
+.slide + .slide{margin-top:0}
+.kicker{
+  font-family:'JetBrains Mono',monospace;
+  font-size:11px;letter-spacing:2px;text-transform:uppercase;
+  color:var(--linen);
+  display:flex;justify-content:space-between;align-items:center;
+  margin-bottom:32px;
+}
+.kicker .num{color:var(--carmine);font-weight:500}
+h1.display{
+  font-family:Fraunces,serif;font-weight:900;font-size:80px;line-height:.96;letter-spacing:-.012em;
+  color:var(--forest);margin-bottom:24px;
+}
+h2.title{
+  font-family:Fraunces,serif;font-weight:600;font-size:48px;line-height:1.05;letter-spacing:-.012em;
+  margin-bottom:20px;
+}
+h2.title::after{
+  content:"";display:block;width:48px;height:2px;background:var(--carmine);margin-top:18px;
+}
+.lede{font-size:19px;color:var(--graphite);max-width:60ch}
+ul.bullets{list-style:none;margin-top:24px}
+ul.bullets li{
+  position:relative;padding-left:28px;font-size:17px;margin-bottom:12px;color:var(--graphite);
+}
+ul.bullets li::before{
+  content:"";position:absolute;left:0;top:.85em;width:14px;height:1.5px;background:var(--carmine);
+}
+.callout{
+  font-family:Fraunces,serif;font-style:italic;font-size:24px;color:var(--forest);
+  border-left:2px solid var(--carmine);padding:8px 0 8px 20px;margin-top:28px;max-width:62ch;
+}
+table{width:100%;border-collapse:collapse;margin-top:24px;font-variant-numeric:tabular-nums}
+th,td{padding:12px 16px;text-align:left;border-bottom:1px solid rgba(15,42,38,.12);font-size:15px}
+th{
+  font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:1.5px;text-transform:uppercase;
+  font-weight:500;color:var(--linen);
+}
+td.num{text-align:right;font-variant-numeric:tabular-nums}
+.foot{
+  position:absolute;bottom:24px;left:56px;right:56px;
+  display:flex;justify-content:space-between;align-items:center;
+  font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:2px;text-transform:uppercase;
+  color:var(--linen);border-top:1px solid rgba(15,42,38,.12);padding-top:14px;
+}
+.foot .accent{color:var(--carmine)}
+.day-row{display:grid;grid-template-columns:80px 1fr;gap:24px;align-items:baseline;margin-top:12px}
+.day-row .num{
+  font-family:Fraunces,serif;font-weight:900;font-size:48px;color:var(--carmine);line-height:1;
+}
+.day-row .meta{font-size:17px;color:var(--graphite)}
+.tier-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:24px}
+.tier{
+  border:1px solid rgba(15,42,38,.18);padding:24px;
+}
+.tier .name{font-family:Fraunces,serif;font-weight:600;font-size:24px}
+.tier .price{font-family:Fraunces,serif;font-weight:900;font-size:34px;margin-top:4px}
+.tier .meta{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:var(--linen);margin-top:8px}
+.tier ul{list-style:none;margin-top:14px}
+.tier ul li{font-size:14px;color:var(--graphite);padding:6px 0;border-top:1px dashed rgba(15,42,38,.12)}
+.dot{display:inline-block;width:8px;height:8px;background:var(--cedar);border-radius:50%;margin-right:8px;animation:pulse 1.6s ease-in-out infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.35}}
+.col-2{display:grid;grid-template-columns:1fr 1fr;gap:32px;margin-top:24px}
+.col-2 h3{font-family:Fraunces,serif;font-weight:600;font-size:21px;margin-bottom:8px}
+.col-2 p{font-size:15px;color:var(--graphite)}
+@media print{
+  body{padding:0}
+  .deck{padding:0}
+  .slide{margin:0;border:0;page-break-after:always;min-height:100vh}
+}
+</style>
+</head>
+<body>
+<div class="deck">
+
+<section class="slide">
+  <div class="kicker"><span>Dispatch</span><span class="num">01 / 10</span></div>
+  <h1 class="display">Dispatch.</h1>
+  <p class="lede" style="font-size:24px;font-family:Fraunces,serif;font-weight:400;font-style:italic;">A productized chatbot agency. Spec on Monday. Bot live by Friday. One knowledge base, three channels, one bill.</p>
+  <p style="margin-top:auto;font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:1.5px;color:var(--linen)">chatbot-agency.prin7r.com</p>
+  <div class="foot"><span><span class="dot"></span>kickoff stamp</span><span>2026 — wave 2</span></div>
+</section>
+
+<section class="slide">
+  <div class="kicker"><span>The problem</span><span class="num">02 / 10</span></div>
+  <h2 class="title">Late-night DMs eat the booking.</h2>
+  <p class="lede">A salon, clinic, school, or shop gets 30-200 inbound DMs a day across messengers. Twenty to forty percent of overnight DMs churn before the owner replies — that is the booking.</p>
+  <ul class="bullets">
+    <li>One missed Saturday booking — $80-300 lost, sometimes forever.</li>
+    <li>The owner triages on her phone past midnight.</li>
+    <li>She tried ManyChat, set up two flows, abandoned them.</li>
+    <li>She does not want a builder. She wants a bot.</li>
+  </ul>
+  <div class="foot"><span>The owner-operator is the bottleneck</span><span>02</span></div>
+</section>
+
+<section class="slide">
+  <div class="kicker"><span>Why now</span><span class="num">03 / 10</span></div>
+  <h2 class="title">Three things turned over in the last 18 months.</h2>
+  <ul class="bullets">
+    <li>WhatsApp Cloud API is finally self-serve in target geographies.</li>
+    <li>GLM 5.1 Flash + Claude 4.5 Haiku routing pulls per-message cost down to ~$0.001 — finally below SMB unit economics in cheap currencies.</li>
+    <li>The 2017-2019 Messenger flow agencies died. The 2023 GPT-wrapper shops priced themselves out. The owner-operator has no current option.</li>
+  </ul>
+  <p class="callout">The market is not new. The pricing footprint is.</p>
+  <div class="foot"><span>Pricing footprint, not product novelty</span><span>03</span></div>
+</section>
+
+<section class="slide">
+  <div class="kicker"><span>The product</span><span class="num">04 / 10</span></div>
+  <h2 class="title">A done-for-you chatbot in five working days.</h2>
+  <p class="lede">Telegram + WhatsApp + Discord. One knowledge base. Multilingual. Owner handoff baked in.</p>
+  <div class="day-row"><div class="num">01</div><div class="meta"><strong>Kickoff.</strong> KB ingest from your Notion / website / FAQ. One single-point-of-contact dispatcher.</div></div>
+  <div class="day-row"><div class="num">02</div><div class="meta"><strong>Tone tuning.</strong> Twenty sample answers reviewed with you.</div></div>
+  <div class="day-row"><div class="num">03</div><div class="meta"><strong>Channels wired.</strong> Telegram, WhatsApp Cloud API, Discord — in staging tenant.</div></div>
+  <div class="day-row"><div class="num">04</div><div class="meta"><strong>Owner handoff tested.</strong> Weekly tuning queue seeded. Escalation rules locked.</div></div>
+  <div class="day-row"><div class="num">05</div><div class="meta"><strong>Friday handoff.</strong> Bot live on real numbers. Dispatcher on call all weekend.</div></div>
+  <div class="foot"><span>Five days. One bill. Three channels.</span><span>04</span></div>
+</section>
+
+<section class="slide">
+  <div class="kicker"><span>The wedge</span><span class="num">05 / 10</span></div>
+  <h2 class="title">Four properties no incumbent combines.</h2>
+  <ul class="bullets">
+    <li><strong>Done-for-you in 5 days.</strong> Not a builder (ManyChat). Not a six-week SOW (Decagon, Sierra).</li>
+    <li><strong>LLM routing for cheap currencies.</strong> GLM 5.1 Flash for &gt;80% of replies; Claude 4.5 Haiku for the long tail; Whisper for voice notes.</li>
+    <li><strong>Three channels, one bill.</strong> Telegram + WhatsApp + Discord from one knowledge base. Optional web widget on Pro.</li>
+    <li><strong>Ongoing tuning is the subscription.</strong> Weekly call, monthly accuracy report, KB freshness watermark — the part nobody else productized.</li>
+  </ul>
+  <div class="foot"><span>Onboarding as the product</span><span>05</span></div>
+</section>
+
+<section class="slide">
+  <div class="kicker"><span>Pricing</span><span class="num">06 / 10</span></div>
+  <h2 class="title">Three tiers. Setup fees non-negotiable.</h2>
+  <div class="tier-grid">
+    <div class="tier">
+      <div class="meta">tier 1</div>
+      <div class="name">Starter</div>
+      <div class="price">$299 + $79/mo</div>
+      <ul>
+        <li>1 channel</li>
+        <li>Core only</li>
+        <li>2,000 msgs/mo</li>
+        <li>1 tuning hour</li>
+      </ul>
+    </div>
+    <div class="tier" style="border-color:var(--carmine);background:var(--cream-2)">
+      <div class="meta" style="color:var(--carmine)">tier 2 · most popular</div>
+      <div class="name">Growth</div>
+      <div class="price">$599 + $199/mo</div>
+      <ul>
+        <li>2 channels</li>
+        <li>Core + 1 module</li>
+        <li>10,000 msgs/mo</li>
+        <li>3 tuning hours</li>
+      </ul>
+    </div>
+    <div class="tier">
+      <div class="meta">tier 3</div>
+      <div class="name">Pro</div>
+      <div class="price">$1,200 + $449/mo</div>
+      <ul>
+        <li>3 channels + widget</li>
+        <li>All modules</li>
+        <li>40,000 msgs/mo</li>
+        <li>8 tuning hours</li>
+      </ul>
+    </div>
+  </div>
+  <p class="callout">If you don&rsquo;t see a 30% drop in unanswered messages in month one, we refund the setup fee.</p>
+  <div class="foot"><span>USDT / USDC via NOWPayments</span><span>06</span></div>
+</section>
+
+<section class="slide">
+  <div class="kicker"><span>Unit economics</span><span class="num">07 / 10</span></div>
+  <h2 class="title">Growth tier · base-case month.</h2>
+  <table>
+    <tbody>
+      <tr><td>Revenue</td><td class="num">$199</td></tr>
+      <tr><td>LLM tokens (GLM Flash + Haiku fallback)</td><td class="num">$8-12</td></tr>
+      <tr><td>WhatsApp Cloud API conversation fees</td><td class="num">$30</td></tr>
+      <tr><td>Hosting + vector + embeddings</td><td class="num">$5</td></tr>
+      <tr><td>Whisper voice notes</td><td class="num">$1.50</td></tr>
+      <tr><td>Tuning labor (mostly automated)</td><td class="num">$15</td></tr>
+      <tr><td>Payment processing</td><td class="num">$6</td></tr>
+      <tr><td><strong>Total COGS</strong></td><td class="num"><strong>~$66-70</strong></td></tr>
+      <tr><td><strong>Gross margin</strong></td><td class="num"><strong>65-67%</strong></td></tr>
+      <tr><td>Blended CAC</td><td class="num">$140</td></tr>
+      <tr><td>Payback period (incl. setup)</td><td class="num">~1.1 mo</td></tr>
+      <tr><td>LTV @ 5% churn (gross-margin)</td><td class="num">~$3,100</td></tr>
+    </tbody>
+  </table>
+  <div class="foot"><span>Setup fee covers month-1 CAC</span><span>07</span></div>
+</section>
+
+<section class="slide">
+  <div class="kicker"><span>Go to market</span><span class="num">08 / 10</span></div>
+  <h2 class="title">Hybrid motion. Three channels.</h2>
+  <ul class="bullets">
+    <li><strong>60% cold outbound</strong> — personalized DMs on Telegram + Instagram in RU and LATAM cities. CAC $80-120.</li>
+    <li><strong>25% partner channel</strong> — web studios resell at 40% margin; minimum 5 seats / 12 months.</li>
+    <li><strong>15% inbound / SEO</strong> — vertical-specific RU + ES posts; cheap to produce, ranks where competitors are English-only.</li>
+  </ul>
+  <p class="callout">Day-90 target — 12-20 customers · $2.5-5k MRR · 3-4 partner studios · 12 vertical posts published.</p>
+  <div class="foot"><span>No paid ads. Ever.</span><span>08</span></div>
+</section>
+
+<section class="slide">
+  <div class="kicker"><span>Risks</span><span class="num">09 / 10</span></div>
+  <h2 class="title">Where the business breaks. How we hold it.</h2>
+  <table>
+    <thead><tr><th>Risk</th><th>Mitigation</th></tr></thead>
+    <tbody>
+      <tr><td>WhatsApp policy change</td><td>Telegram fallback in every contract.</td></tr>
+      <tr><td>LLM provider price hike</td><td>Three-provider router (GLM, Anthropic, self-hosted Llama).</td></tr>
+      <tr><td>Setup-fee aversion</td><td>Refund clause. Annual prepay = 2 months free.</td></tr>
+      <tr><td>Customer expects human-grade replies</td><td>Explicit handoff. Weekly accuracy report. Public KB freshness.</td></tr>
+      <tr><td>KB rot</td><td>Auto-recrawl + 30-day staleness watermark visible to the customer&rsquo;s customer.</td></tr>
+      <tr><td>Single-vertical concentration</td><td>Vertical playbook portfolio (clinic, salon, school, real estate, e-com).</td></tr>
+    </tbody>
+  </table>
+  <div class="foot"><span>Refund clause is the bond</span><span>09</span></div>
+</section>
+
+<section class="slide">
+  <div class="kicker"><span>Ask + traction</span><span class="num">10 / 10</span></div>
+  <h2 class="title">This wave shipped. Next quarter on plan.</h2>
+  <div class="col-2">
+    <div>
+      <h3>Shipped (this wave)</h3>
+      <p>Public landing live · NOWPayments crypto checkout wired · IPN webhook (HMAC-SHA512) · 10 strategy docs · DESIGN.md · pitch deck.</p>
+    </div>
+    <div>
+      <h3>Next 30 days</h3>
+      <p>3 paid pilots · $300-1,000 MRR · 1 partner studio. First public retro thread.</p>
+    </div>
+    <div>
+      <h3>Next 90 days</h3>
+      <p>12-20 active customers · $2.5-5k MRR · 3-4 partner studios. apps/app/ open-saas fork bootstrapped behind a feature flag.</p>
+    </div>
+    <div>
+      <h3>Decision at day 90</h3>
+      <p>Hire one part-time ops contractor — yes / no. Stay solo founder + agent fleet otherwise.</p>
+    </div>
+  </div>
+  <p style="margin-top:auto;font-family:'JetBrains Mono',monospace;font-size:13px;letter-spacing:1.5px;color:var(--linen)">chatbot-agency.prin7r.com &nbsp;·&nbsp; desk@chatbot-agency.prin7r.com</p>
+  <div class="foot"><span><span class="dot"></span>dispatch.</span><span class="accent">end</span></div>
+</section>
+
+</div>
+</body>
+</html>

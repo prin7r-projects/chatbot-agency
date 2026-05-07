@@ -1,0 +1,7 @@
+<svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Dispatch">
+  <rect x="0" y="0" width="64" height="64" rx="2" fill="#0F2A26"/>
+  <text x="32" y="42" text-anchor="middle"
+        font-family="Fraunces, Georgia, serif" font-weight="900" font-size="32"
+        fill="#F4EDE0">Dt</text>
+  <rect x="14" y="51" width="36" height="2" fill="#C24656"/>
+</svg>
