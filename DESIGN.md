@@ -11,6 +11,8 @@ The visual identity is sourced from [`docs/01-brand-identity.md`](docs/01-brand-
 
 **Product** — Dispatch is a productized chatbot agency that delivers a working multilingual bot to Telegram, Discord, and WhatsApp from one knowledge base in five working days. The product is the *delivery cadence*, not the platform: kickoff Monday, channels wired by Wednesday, owner handoff Thursday, live Friday. The subscription pays for the weekly tuning hour and the monthly accuracy report — the part that keeps the bot true to a salon's actual prices, hours, and calendar.
 
+**Wave 2 redesign 2026-05-08.** The visual identity is now a confident dark canvas (deep forest `#0A1F1B`) with off-white surfaces (`#FAFAF8` bone). The editorial-dispatch register is unchanged — the masthead-rule typography, the schedule-as-promise, the carmine accent, the kickoff stamp — but the ambient feel is now an after-hours dispatch room rather than a daylight broadsheet. The brand essence (editorial dispatch, schedule-as-promise) and all copy stayed identical; the canvas, surfaces, and grotesk family rotated.
+
 **Audience** —
 - **Anya, the salon owner / clinic operator**: 32-44, runs a 3-12 person beauty studio, dental practice, or fitness studio in a Russian-speaking city or LATAM mirror. 60-200 inbound DMs/day. Tried ManyChat, abandoned it. Wants a bot, not a builder.
 - **Diego, the LATAM web studio principal**: 35-52, 4-9 person Shopify / Tilda shop with 30-50 active SMB clients. Wants a productized chatbot offering he can resell at 40% margin without operating a platform.

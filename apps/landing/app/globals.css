@@ -3,42 +3,54 @@
 @tailwind utilities;
 
 /* ---------------------------------------------------------------------------
-   [DISPATCH_GLOBALS] Editorial-dispatch baseline.
+   [DISPATCH_GLOBALS] Wave 2 redesign 2026-05-08.
+   Editorial-dispatch baseline pivoted to a confident dark canvas.
+   Five-color print palette retained but inverted: deep forest as the page,
+   bone (off-white) as the ink. Inter is BANNED — Geist is the grotesk.
+   Fraunces stays for editorial display.
    The palette + type system are documented in /DESIGN.md sections 4-6.
-   Five colors, three families, square edges, one shadow, one animation.
    --------------------------------------------------------------------------- */
 
-@import url("https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,900&family=Fraunces:ital,opsz,wght@1,9..144,400&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,900&family=Fraunces:ital,opsz,wght@1,9..144,400;1,9..144,500&family=Geist:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap");
 
 :root {
-  --cream: #F4EDE0;
-  --cream-2: #EAE0CD;
-  --forest: #0F2A26;
-  --graphite: #1F2422;
-  --linen: #857C71;
-  --carmine: #C24656;
-  --cedar: #A07A2C;
+  /* New Wave 2 tokens — primary names */
+  --ink: #0A1F1B;
+  --ink-2: #0E2622;
+  --ink-3: #143028;
+  --bone: #FAFAF8;
+  --bone-dim: #E7E2D7;
+  --graphite: #C7C2B6;
+  --linen: #8A8275;
+  --carmine: #D45D6B;
+  --cedar: #C9A267;
+
+  /* Legacy aliases — keep cream/forest/cream-2 utilities resolving */
+  --cream: var(--bone);
+  --cream-2: var(--ink-2);
+  --forest: var(--ink);
 }
 
 html {
-  background: var(--cream);
-  color: var(--forest);
+  background: var(--ink);
+  color: var(--bone);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 body {
-  font-family: Inter, ui-sans-serif, system-ui, sans-serif;
+  font-family: "Geist", "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
   font-size: 16px;
   line-height: 1.55;
   letter-spacing: -0.005em;
-  background: var(--cream);
-  color: var(--forest);
+  background: var(--ink);
+  color: var(--bone);
+  font-feature-settings: "ss01", "cv11";
 }
 
 ::selection {
   background: var(--carmine);
-  color: var(--cream);
+  color: var(--ink);
 }
 
 /* Focus ring — visible carmine outline, 2px offset. */
@@ -52,8 +64,8 @@ body {
   position: absolute;
   left: -9999px;
   top: 8px;
-  background: var(--forest);
-  color: var(--cream);
+  background: var(--bone);
+  color: var(--ink);
   padding: 8px 12px;
   font-family: "JetBrains Mono", monospace;
   font-size: 11px;
@@ -69,19 +81,23 @@ body {
   display: inline-flex;
   align-items: center;
   gap: 10px;
-  background: var(--forest);
-  color: var(--cream);
-  font-family: Inter, sans-serif;
+  background: var(--bone);
+  color: var(--ink);
+  font-family: "Geist", sans-serif;
   font-weight: 500;
   font-size: 15px;
   padding: 14px 22px;
   border-radius: 0;
-  border: 1px solid var(--forest);
+  border: 1px solid var(--bone);
   text-decoration: none;
-  transition: background 80ms linear, border-color 80ms linear, color 80ms linear;
+  transition: background 320ms cubic-bezier(0.32, 0.72, 0, 1),
+              border-color 320ms cubic-bezier(0.32, 0.72, 0, 1),
+              color 320ms cubic-bezier(0.32, 0.72, 0, 1),
+              transform 320ms cubic-bezier(0.32, 0.72, 0, 1);
   cursor: pointer;
 }
-.btn:hover { background: var(--carmine); border-color: var(--carmine); color: var(--cream); }
+.btn:hover { background: var(--carmine); border-color: var(--carmine); color: var(--bone); transform: translateY(-1px); }
+.btn:active { transform: translateY(0); }
 .btn:disabled { opacity: .5; cursor: not-allowed; }
 
 .btn-ghost {
@@ -89,60 +105,75 @@ body {
   align-items: center;
   gap: 10px;
   background: transparent;
-  color: var(--forest);
-  font-family: Inter, sans-serif;
+  color: var(--bone);
+  font-family: "Geist", sans-serif;
   font-weight: 500;
   font-size: 15px;
   padding: 14px 22px;
   border-radius: 0;
-  border: 1px solid var(--forest);
+  border: 1px solid rgba(250, 250, 248, .25);
   text-decoration: none;
-  transition: background 80ms linear, color 80ms linear;
+  transition: background 320ms cubic-bezier(0.32, 0.72, 0, 1),
+              color 320ms cubic-bezier(0.32, 0.72, 0, 1),
+              border-color 320ms cubic-bezier(0.32, 0.72, 0, 1);
   cursor: pointer;
 }
-.btn-ghost:hover { background: var(--forest); color: var(--cream); }
+.btn-ghost:hover { background: var(--bone); color: var(--ink); border-color: var(--bone); }
 
 .kicker {
   font-family: "JetBrains Mono", monospace;
   font-size: 11px;
-  letter-spacing: 0.16em;
+  letter-spacing: 0.18em;
   text-transform: uppercase;
   color: var(--linen);
+  font-weight: 500;
 }
 
 .eyebrow-rule {
   display: block;
-  width: 32px;
-  height: 1.5px;
+  width: 28px;
+  height: 1px;
   background: var(--carmine);
-  margin: 16px 0;
+  margin: 14px 0 18px;
 }
 
 .dispatch-frame {
-  background: var(--cream);
-  border: 1px solid rgba(15, 42, 38, .18);
+  background: var(--ink-2);
+  border: 1px solid rgba(250, 250, 248, .08);
   position: relative;
+  transition: border-color 480ms cubic-bezier(0.32, 0.72, 0, 1),
+              background 480ms cubic-bezier(0.32, 0.72, 0, 1),
+              transform 480ms cubic-bezier(0.32, 0.72, 0, 1);
 }
 .dispatch-frame::after {
   content: "";
   position: absolute;
   inset: 8px;
-  border: 1px solid rgba(15, 42, 38, .06);
+  border: 1px solid rgba(250, 250, 248, .04);
   pointer-events: none;
+  transition: border-color 480ms cubic-bezier(0.32, 0.72, 0, 1);
+}
+.dispatch-frame:hover {
+  border-color: rgba(250, 250, 248, .14);
+  background: var(--ink-3);
+  transform: translateY(-2px);
+}
+.dispatch-frame:hover::after {
+  border-color: rgba(250, 250, 248, .08);
 }
 
 .kickoff-stamp {
-  background: var(--cream-2);
-  border: 1px solid rgba(15, 42, 38, .18);
+  background: var(--ink-2);
+  border: 1px solid rgba(250, 250, 248, .12);
   padding: 14px 18px;
   display: inline-flex;
   align-items: center;
   gap: 10px;
   font-family: "JetBrains Mono", monospace;
   font-size: 11px;
-  letter-spacing: 0.16em;
+  letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: var(--graphite);
+  color: var(--bone-dim);
 }
 
 .pulse-dot {
@@ -152,6 +183,7 @@ body {
   background: var(--cedar);
   border-radius: 50%;
   animation: pulse 1.6s ease-in-out infinite;
+  box-shadow: 0 0 12px 0 rgba(201, 162, 103, .55);
 }
 
 @keyframes pulse {
@@ -161,61 +193,225 @@ body {
 
 @media (prefers-reduced-motion: reduce) {
   .pulse-dot { animation: none; opacity: 1; }
+  .day-cell, .dispatch-frame, .tier { transition: none !important; }
 }
 
 .monoglyph {
   font-family: "JetBrains Mono", monospace;
   font-weight: 500;
-  letter-spacing: 0.16em;
+  letter-spacing: 0.18em;
   text-transform: lowercase;
-  color: var(--forest);
+  color: var(--bone);
 }
 
 .hairline {
   height: 1px;
-  background: rgba(15, 42, 38, .12);
+  background: rgba(250, 250, 248, .08);
 }
 
 .carmine-rule {
-  height: 2px;
+  height: 1px;
   background: var(--carmine);
+  opacity: .85;
 }
 
 .section {
-  border-bottom: 1px solid rgba(15, 42, 38, .12);
+  border-bottom: 1px solid rgba(250, 250, 248, .06);
 }
 
-/* Tier card */
-.tier {
-  background: var(--cream);
-  border: 1px solid rgba(15, 42, 38, .18);
-  padding: 28px;
+/* --- Channel monoglyph stripe (refined: hairlines + monospace) ----------- */
+
+.channel-row {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  border-top: 1px solid rgba(250, 250, 248, .12);
+  border-bottom: 1px solid rgba(250, 250, 248, .12);
+}
+.channel-row > li {
+  position: relative;
+  padding: 36px 24px;
   display: flex;
   flex-direction: column;
-  gap: 14px;
+  gap: 10px;
+  transition: background 480ms cubic-bezier(0.32, 0.72, 0, 1);
+}
+.channel-row > li + li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 24px;
+  bottom: 24px;
+  width: 1px;
+  background: rgba(250, 250, 248, .08);
+}
+.channel-row > li:hover {
+  background: rgba(212, 93, 107, .04);
+}
+.channel-row .glyph {
+  font-family: "JetBrains Mono", monospace;
+  font-weight: 500;
+  font-size: 28px;
+  letter-spacing: -0.01em;
+  color: var(--bone);
+  text-transform: lowercase;
+}
+.channel-row .channel-label {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 10.5px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--linen);
+}
+@media (max-width: 768px) {
+  .channel-row {
+    grid-template-columns: 1fr 1fr;
+  }
+  .channel-row > li:nth-child(2)::before,
+  .channel-row > li:nth-child(4)::before {
+    display: block;
+  }
+  .channel-row > li:nth-child(3) {
+    border-top: 1px solid rgba(250, 250, 248, .08);
+  }
+  .channel-row > li:nth-child(4) {
+    border-top: 1px solid rgba(250, 250, 248, .08);
+  }
+}
+
+/* --- Day-by-day cells: cinematic spacing + micro-interactions ------------ */
+
+.day-cell {
+  position: relative;
+  background: var(--ink);
+  padding: 40px 32px 36px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  min-height: 320px;
+  transition: background 600ms cubic-bezier(0.32, 0.72, 0, 1);
+  overflow: hidden;
+}
+.day-cell::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--carmine), transparent);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 700ms cubic-bezier(0.32, 0.72, 0, 1);
+}
+.day-cell:hover {
+  background: var(--ink-2);
+}
+.day-cell:hover::before {
+  transform: scaleX(1);
+}
+.day-cell .day-num {
+  font-family: Fraunces, serif;
+  font-weight: 900;
+  font-size: 76px;
+  line-height: 0.9;
+  letter-spacing: -0.02em;
+  color: var(--carmine);
+  transition: transform 700ms cubic-bezier(0.32, 0.72, 0, 1),
+              letter-spacing 700ms cubic-bezier(0.32, 0.72, 0, 1);
+}
+.day-cell:hover .day-num {
+  transform: translateY(-2px);
+  letter-spacing: -0.025em;
+}
+.day-cell .day-label {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 10.5px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--linen);
+}
+.day-cell .day-title {
+  font-family: Fraunces, serif;
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 1.05;
+  letter-spacing: -0.012em;
+  color: var(--bone);
+}
+.day-cell .day-body {
+  font-size: 14.5px;
+  color: var(--bone-dim);
+  line-height: 1.55;
+  max-width: 30ch;
+}
+
+@media (max-width: 1024px) {
+  .day-cell { min-height: 280px; padding: 32px 24px 28px; }
+  .day-cell .day-num { font-size: 64px; }
+}
+
+/* --- Tier card: haptic depth, low-opacity surface tonality --------------- */
+
+.tier {
+  position: relative;
+  background: var(--ink-2);
+  border: 1px solid rgba(250, 250, 248, .07);
+  padding: 32px 28px 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  box-shadow: 0 1px 0 0 rgba(250, 250, 248, .04) inset, 0 30px 60px -32px rgba(0, 0, 0, .55);
+  transition: transform 600ms cubic-bezier(0.32, 0.72, 0, 1),
+              border-color 600ms cubic-bezier(0.32, 0.72, 0, 1),
+              background 600ms cubic-bezier(0.32, 0.72, 0, 1),
+              box-shadow 600ms cubic-bezier(0.32, 0.72, 0, 1);
+}
+.tier::before {
+  /* Subtle inner highlight for haptic depth — top edge of the card */
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 8%;
+  right: 8%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(250, 250, 248, .14), transparent);
+  pointer-events: none;
+}
+.tier:hover {
+  background: var(--ink-3);
+  border-color: rgba(250, 250, 248, .12);
+  transform: translateY(-3px);
+  box-shadow: 0 1px 0 0 rgba(250, 250, 248, .07) inset, 0 40px 80px -30px rgba(0, 0, 0, .65);
 }
 .tier.featured {
-  background: var(--cream-2);
-  border-color: var(--carmine);
+  background: linear-gradient(180deg, rgba(212, 93, 107, .07) 0%, var(--ink-2) 60%);
+  border-color: rgba(212, 93, 107, .35);
+  box-shadow: 0 1px 0 0 rgba(212, 93, 107, .12) inset, 0 30px 60px -30px rgba(212, 93, 107, .25), 0 30px 60px -32px rgba(0, 0, 0, .55);
+}
+.tier.featured:hover {
+  border-color: rgba(212, 93, 107, .55);
 }
 .tier .tier-name {
   font-family: Fraunces, serif;
   font-weight: 600;
-  font-size: 24px;
-  line-height: 1.1;
+  font-size: 28px;
+  line-height: 1.05;
+  letter-spacing: -0.012em;
+  color: var(--bone);
 }
 .tier .tier-price {
   font-family: Fraunces, serif;
   font-weight: 900;
-  font-size: 32px;
-  line-height: 1.05;
-  letter-spacing: -0.012em;
+  font-size: 44px;
+  line-height: 1;
+  letter-spacing: -0.022em;
+  color: var(--bone);
 }
 .tier .tier-mo {
-  font-family: Inter, sans-serif;
+  font-family: "Geist", sans-serif;
   font-weight: 400;
-  font-size: 18px;
-  color: var(--graphite);
+  font-size: 16px;
+  color: var(--bone-dim);
 }
 .tier ul.tier-features {
   list-style: none;
@@ -225,47 +421,54 @@ body {
   flex-direction: column;
 }
 .tier ul.tier-features li {
-  font-size: 14.5px;
-  color: var(--graphite);
-  padding: 9px 0;
-  border-top: 1px dashed rgba(15, 42, 38, .14);
+  font-size: 14px;
+  color: var(--bone-dim);
+  padding: 11px 0;
+  border-top: 1px solid rgba(250, 250, 248, .06);
+  line-height: 1.5;
 }
 .tier ul.tier-features li:first-child { border-top: 0; }
 
 /* FAQ details */
 details.faq {
-  border-top: 1px solid rgba(15, 42, 38, .12);
-  padding: 22px 0;
+  border-top: 1px solid rgba(250, 250, 248, .08);
+  padding: 24px 0;
+  transition: padding 320ms cubic-bezier(0.32, 0.72, 0, 1);
 }
-details.faq:last-child { border-bottom: 1px solid rgba(15, 42, 38, .12); }
+details.faq:last-child { border-bottom: 1px solid rgba(250, 250, 248, .08); }
 details.faq summary {
   list-style: none;
   cursor: pointer;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  gap: 24px;
   font-family: Fraunces, serif;
-  font-weight: 600;
-  font-size: 21px;
-  color: var(--forest);
+  font-weight: 500;
+  font-size: 22px;
+  letter-spacing: -0.012em;
+  color: var(--bone);
+  transition: color 320ms cubic-bezier(0.32, 0.72, 0, 1);
 }
+details.faq summary:hover { color: var(--carmine); }
 details.faq summary::-webkit-details-marker { display: none; }
 details.faq summary::after {
   content: "+";
   font-family: "JetBrains Mono", monospace;
-  font-size: 22px;
+  font-size: 20px;
   color: var(--carmine);
-  transition: transform 120ms linear;
+  transition: transform 320ms cubic-bezier(0.32, 0.72, 0, 1);
 }
 details.faq[open] summary::after { content: "−"; }
 details.faq p {
   margin-top: 14px;
   font-size: 16px;
-  color: var(--graphite);
+  color: var(--bone-dim);
   max-width: 64ch;
+  line-height: 1.65;
 }
 
-/* Subtle paper grain on hero — 2% opacity SVG noise. */
+/* Subtle paper grain on hero — extremely faint on the dark canvas. */
 .grain {
   position: relative;
   isolation: isolate;
@@ -275,6 +478,33 @@ details.faq p {
   position: absolute;
   inset: 0;
   pointer-events: none;
-  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='1' stitchTiles='stitch'/></filter><rect width='160' height='160' filter='url(%23n)' opacity='0.04'/></svg>");
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='1' stitchTiles='stitch'/></filter><rect width='160' height='160' filter='url(%23n)' opacity='0.06'/></svg>");
   z-index: -1;
+  mix-blend-mode: overlay;
+}
+
+/* Ambient orbs — used sparingly behind the hero for cinematic depth.
+   Pure transform/opacity for GPU safety; pointer-events disabled. */
+.ambient-orb {
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+  filter: blur(80px);
+  opacity: 0.18;
+}
+
+/* Scroll-entry baseline — used by client-side IntersectionObserver. */
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 800ms cubic-bezier(0.32, 0.72, 0, 1),
+              transform 800ms cubic-bezier(0.32, 0.72, 0, 1);
+  will-change: transform, opacity;
+}
+.reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+@media (prefers-reduced-motion: reduce) {
+  .reveal { opacity: 1; transform: none; transition: none; }
 }

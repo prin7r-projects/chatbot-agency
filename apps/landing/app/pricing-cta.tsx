@@ -53,10 +53,11 @@ export function PricingCta({ plan, label, variant = "default", fullWidth = false
     }
   }
 
+  // Wave 2 redesign 2026-05-08: dark canvas → primary CTA is bone-fill ink-text.
   const baseClass =
     variant === "ghost"
-      ? "inline-flex items-center justify-center gap-2 h-12 px-5 text-[15px] font-medium border border-forest text-forest bg-transparent hover:bg-forest hover:text-cream transition-colors duration-75 focus-visible:outline focus-visible:outline-1 focus-visible:outline-offset-2 focus-visible:outline-carmine rounded-none disabled:opacity-50 disabled:cursor-not-allowed"
-      : "inline-flex items-center justify-center gap-2 h-12 px-5 text-[15px] font-medium border border-forest bg-forest text-cream hover:bg-carmine hover:border-carmine transition-colors duration-75 focus-visible:outline focus-visible:outline-1 focus-visible:outline-offset-2 focus-visible:outline-carmine rounded-none disabled:opacity-50 disabled:cursor-not-allowed";
+      ? "inline-flex items-center justify-center gap-2 h-12 px-5 text-[15px] font-medium font-sans border border-bone/25 text-bone bg-transparent hover:bg-bone hover:text-ink hover:border-bone hover:-translate-y-[1px] transition-all duration-300 ease-[cubic-bezier(0.32,0.72,0,1)] focus-visible:outline focus-visible:outline-1 focus-visible:outline-offset-2 focus-visible:outline-carmine rounded-none disabled:opacity-50 disabled:cursor-not-allowed active:scale-[0.98]"
+      : "inline-flex items-center justify-center gap-2 h-12 px-5 text-[15px] font-medium font-sans border border-bone bg-bone text-ink hover:bg-carmine hover:text-bone hover:border-carmine hover:-translate-y-[1px] transition-all duration-300 ease-[cubic-bezier(0.32,0.72,0,1)] focus-visible:outline focus-visible:outline-1 focus-visible:outline-offset-2 focus-visible:outline-carmine rounded-none disabled:opacity-50 disabled:cursor-not-allowed active:scale-[0.98]";
 
   return (
     <div className={fullWidth ? "w-full" : undefined}>
