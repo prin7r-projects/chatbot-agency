@@ -34,11 +34,19 @@
 **Effort.** S — 30-50 tool-uses, 2-4h.
 
 **DoD.**
-- [ ] `pnpm install` clean.
-- [ ] `pnpm -F app dev` starts open-saas Wasp.
-- [ ] Each worker `pnpm dev` runs (no-op stub).
-- [ ] Postgres + Redis healthy in `docker compose ps`.
-- [ ] Production landing still 200.
+- [x] `pnpm install` clean. ✅ *2026-05-08: Resolved 541 packages, 0 errors, 0 peer warnings.*
+- [ ] `pnpm -F app dev` starts open-saas Wasp. ⏳ *2026-05-08: Scaffolding in place. Requires `wasp` CLI on deploy host. `wasp start` wired as dev script.*
+- [x] Each worker `pnpm dev` runs (no-op stub). ✅ *2026-05-08: All 4 workers log their no-op line and exit cleanly.*
+- [ ] Postgres + Redis healthy in `docker compose ps`. ⏳ *2026-05-08: docker-compose.yml updated with pgvector/pgvector:pg16 + redis:7-alpine. Requires Docker on deploy host.*
+- [x] Production landing still 200. ✅ *2026-05-08: `curl -sI https://chatbot-agency.prin7r.com` → `HTTP/2 200`.*
+
+**Verification notes (2026-05-08):**
+- Root `pnpm-workspace.yaml` added, root `package.json` with `pnpm@10.33.2`.
+- `apps/app/` populated from `wasp-lang/open-saas` template (magic-link auth default).
+- `docker-compose.yml` extended with postgres (pgvector/pgvector:pg16) + redis (redis:7-alpine).
+- `workers/` created: kb-ingester, llm-router, owner-handoff, tuning — each a Bun project with no-op stub.
+- `.env.example` extended with DATABASE_URL, REDIS_URL, INTEGRATION_KEY, GLM_API_KEY, ANTHROPIC_API_KEY, WHISPER_ENDPOINT, ADMIN_API_KEY, DISPATCHER_TG_CHANNEL_ID, POSTMARK_SERVER_TOKEN.
+- Landing untouched (verified 200 post-scaffold).
 
 **Hand-off context.** Don't touch the live landing. Workers must NOT expose ports.
 

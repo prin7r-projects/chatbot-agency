@@ -5,6 +5,8 @@
 - Landing — <https://chatbot-agency.prin7r.com>
 - Notion opportunity — <https://www.notion.so/Chatbot-agency-Telegram-Discord-WhatsApp-3543ceec26198173b275e1e7cf29d191>
 - Repo — <https://github.com/prin7r-projects/chatbot-agency>
+- Spec — [docs/12-technical-specification.md](./docs/12-technical-specification.md)
+- Plan — [docs/13-implementation-plan.md](./docs/13-implementation-plan.md)
 
 ## Repo structure
 
@@ -13,12 +15,18 @@
 ├── DESIGN.md                 # 15-section design + style guide (Chief of Design)
 ├── apps/
 │   ├── landing/              # Next.js 15 + ShadCN — hero / days / pricing / FAQ
-│   └── app/                  # Stub for the open-saas dashboard (deferred)
-├── docs/                     # 10 strategy docs + pitch deck (MD + HTML)
+│   └── app/                  # open-saas (Wasp) dashboard — magic-link auth
+├── workers/                  # Bun workers (Phase 1+)
+│   ├── kb-ingester/          # KB ingestion + embedding pipeline
+│   ├── llm-router/           # GLM 5.1 Flash router with RAG
+│   ├── owner-handoff/        # Low-confidence escalation pings
+│   └── tuning/               # Weekly tuning agenda + accuracy reports
+├── docs/                     # 13 strategy + spec docs + pitch deck
 │   └── screenshots/          # Desktop + mobile production captures
 ├── Dockerfile.landing        # Next.js standalone build, multi-stage
-├── docker-compose.yml        # Single-service Traefik label set
-└── .env.example              # NOWPayments + Plisio + Reown env names
+├── docker-compose.yml        # landing + Postgres 16/pgvector + Redis 7
+├── pnpm-workspace.yaml       # pnpm monorepo workspace
+└── .env.example              # All environment variables (Wave 2 + 3)
 ```
 
 ## What this Wave 2 build ships
@@ -40,14 +48,45 @@
 ## Dev quickstart
 
 ```bash
-# From repo root
-cd apps/landing
+# From repo root — install all workspaces (landing + app + workers)
 pnpm install
-cp ../../.env.example ../../.env   # populate NOWPayments creds locally
-pnpm dev                           # http://localhost:3000
+
+# Populate env vars (see .env.example for all variables)
+cp .env.example .env
+
+# Start the landing (Next.js 15)
+pnpm -F relayhouse-landing dev          # http://localhost:3100
+
+# Start the dashboard (requires wasp CLI: https://wasp.sh/docs)
+pnpm -F app dev                          # http://localhost:3000
+
+# Start worker stubs (requires bun: https://bun.sh)
+pnpm -F kb-ingester dev
+pnpm -F llm-router dev
+pnpm -F owner-handoff dev
+pnpm -F tuning dev
+
+# Start infrastructure
+docker compose up -d                     # Postgres 16/pgvector + Redis 7
 ```
 
-The page renders without env credentials, but the **Take Starter / Growth / Pro** buttons return HTTP 503 with a clear error until `NOWPAYMENTS_API_KEY` is set.
+The landing page renders without env credentials, but the **Take Starter / Growth / Pro** buttons return HTTP 503 with a clear error until `NOWPAYMENTS_API_KEY` is set.
+
+### Required environment variables
+
+All variables are listed in [`.env.example`](./.env.example). Key groups:
+
+| Group | Variables | Used by |
+|---|---|---|
+| Payments | `NOWPAYMENTS_API_KEY`, `NOWPAYMENTS_IPN_SECRET` | landing (Wave 2+) |
+| Database | `DATABASE_URL` | app, workers (Wave 3) |
+| Redis | `REDIS_URL` | workers (Wave 3) |
+| Encryption | `INTEGRATION_KEY` | app (Wave 3) |
+| LLM | `GLM_API_KEY`, `ANTHROPIC_API_KEY` | llm-router (Wave 3) |
+| Voice | `WHISPER_ENDPOINT` | llm-router (Wave 3) |
+| Email | `POSTMARK_SERVER_TOKEN` | app (Wave 3) |
+| Admin | `ADMIN_API_KEY` | app (Wave 3) |
+| Dispatcher | `DISPATCHER_TG_CHANNEL_ID` | owner-handoff (Wave 3) |
 
 ## Deploy quickstart
 
@@ -55,18 +94,22 @@ The page renders without env credentials, but the **Take Starter / Growth / Pro*
 ssh storage-contabo
 mkdir -p /opt/prin7r-deploys/chatbot-agency && cd /opt/prin7r-deploys/chatbot-agency
 git clone https://github.com/prin7r-projects/chatbot-agency.git .
-cp .env.example .env && nano .env   # paste NOWPayments creds
+cp .env.example .env && nano .env   # paste all required creds
 docker compose build
 docker compose up -d
 ```
 
 Traefik on `storage-contabo` runs in host-network mode with a Docker provider mounted on `/var/run/docker.sock`; the labels in `docker-compose.yml` are sufficient — no per-subdomain DNS or Traefik dynamic config needed (wildcard `*.prin7r.com → 161.97.99.120` is already in place).
 
-Verify within 5 min:
+Verify:
 
 ```bash
 curl -sI https://chatbot-agency.prin7r.com | head -3
 # HTTP/2 200 …
+docker compose ps
+# relayhouse-landing  Up (healthy)
+# relayhouse-postgres Up (healthy)
+# relayhouse-redis    Up (healthy)
 ```
 
 ## Provenance
