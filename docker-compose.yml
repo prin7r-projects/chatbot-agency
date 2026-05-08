@@ -16,3 +16,53 @@ services:
       - "traefik.http.routers.chatbot-agency.entrypoints=websecure"
       - "traefik.http.routers.chatbot-agency.tls.certresolver=letsencrypt"
       - "traefik.http.services.chatbot-agency.loadbalancer.server.port=3000"
+    networks:
+      - relayhouse
+
+  postgres:
+    image: pgvector/pgvector:pg16
+    container_name: relayhouse-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: relayhouse
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-relayhouse_dev}
+      POSTGRES_DB: relayhouse
+    expose:
+      - "5432"
+    ports:
+      - "127.0.0.1:5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U relayhouse -d relayhouse"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+    networks:
+      - relayhouse
+
+  redis:
+    image: redis:7-alpine
+    container_name: relayhouse-redis
+    restart: unless-stopped
+    expose:
+      - "6379"
+    ports:
+      - "127.0.0.1:6379:6379"
+    volumes:
+      - redisdata:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+    networks:
+      - relayhouse
+
+networks:
+  relayhouse:
+    driver: bridge
+
+volumes:
+  pgdata:
+  redisdata:
