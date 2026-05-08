@@ -1,7 +1,10 @@
 /**
- * [DISPATCH_CARD] Vendored from shadcn/ui (Card) and re-themed against the
- * Dispatch tokens. Square edges, hairline border, no shadow. The repo owns
- * this source per the Prin7r ShadCN-first baseline (DESIGN.md §3).
+ * [DISPATCH_CARD] Round-2 redesign 2026-05-08 — OpenAI reference applied.
+ *
+ * 6.08px border-radius (OpenAI's signature near-square radius), white
+ * surface, fog-border hairline, no shadow. Vendored from shadcn/ui and
+ * re-themed against the Dispatch round-2 tokens. The repo owns this source
+ * per the Prin7r ShadCN-first baseline (DESIGN.md §3).
  */
 
 import * as React from "react";
@@ -15,7 +18,7 @@ export const Card = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDi
     <div
       ref={ref}
       className={cn(
-        "bg-cream border border-graphite/15 rounded-none flex flex-col text-forest",
+        "bg-canvas border border-fog rounded-[6.08px] flex flex-col text-void",
         className
       )}
       {...props}
@@ -27,7 +30,7 @@ export const CardHeader = React.forwardRef<HTMLDivElement, React.HTMLAttributes<
   { className, ...props },
   ref
 ) {
-  return <div ref={ref} className={cn("flex flex-col gap-1.5 p-6", className)} {...props} />;
+  return <div ref={ref} className={cn("flex flex-col gap-1.5 p-8", className)} {...props} />;
 });
 
 export const CardTitle = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(function CardTitle(
@@ -37,7 +40,7 @@ export const CardTitle = React.forwardRef<HTMLDivElement, React.HTMLAttributes<H
   return (
     <div
       ref={ref}
-      className={cn("font-display font-semibold text-2xl leading-tight tracking-tightest", className)}
+      className={cn("font-display font-semibold text-[22px] leading-[1.21] tracking-tight", className)}
       {...props}
     />
   );
@@ -53,12 +56,12 @@ export const CardContent = React.forwardRef<HTMLDivElement, React.HTMLAttributes
   { className, ...props },
   ref
 ) {
-  return <div ref={ref} className={cn("px-6 pb-6", className)} {...props} />;
+  return <div ref={ref} className={cn("px-8 pb-8", className)} {...props} />;
 });
 
 export const CardFooter = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(function CardFooter(
   { className, ...props },
   ref
 ) {
-  return <div ref={ref} className={cn("flex items-center px-6 pb-6", className)} {...props} />;
+  return <div ref={ref} className={cn("flex items-center px-8 pb-8", className)} {...props} />;
 });

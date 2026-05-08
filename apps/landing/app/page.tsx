@@ -3,21 +3,28 @@ import { ButtonAnchor } from "@/app/components/ui/button";
 import { PricingCta } from "@/app/pricing-cta";
 
 /**
- * [DISPATCH_LANDING] Single-page editorial-dispatch landing.
+ * [DISPATCH_LANDING] Round-2 redesign 2026-05-08 — OpenAI reference applied.
  *
  * Sections:
  *   #masthead → #hero → #proof → #days → #service → #pricing
  *   → #sched → #faq → #footer
  *
- * Copy is sourced from /docs/08-marketing-strategy.md and /docs/07-sales-strategy.md.
- * Visual tokens are sourced from /DESIGN.md sections 4-6.
- * NOWPayments wiring lives in /apps/landing/lib/nowpayments.ts and the two
- * API routes under /api/checkout and /api/webhooks.
+ * Canvas pivots from forest/dark to OpenAI white. Achromatic palette;
+ * editorial color (carmine) reserved for four decisive moments only:
+ *   1) the kickoff stamp pulse
+ *   2) the day-numeral ledger entries
+ *   3) the featured tier's 2px top rule
+ *   4) the italic refund clause
+ *
+ * Reference: /Users/keer/projects/prin7r/design-references/openai.md
+ * Visual tokens: /DESIGN.md sections 4-6.
+ * Copy: /docs/08-marketing-strategy.md and /docs/07-sales-strategy.md.
+ * NOWPayments wiring: /apps/landing/lib/nowpayments.ts and /api/checkout|webhooks.
  */
 
 export default function Page() {
   return (
-    <main className="bg-ink text-bone">
+    <main className="bg-canvas text-void">
       <Masthead />
       <Hero />
       <ProofStripe />
@@ -39,15 +46,16 @@ function Masthead() {
   return (
     <header
       id="masthead"
-      className="border-b border-bone/10 bg-ink/85 backdrop-blur-md sticky top-0 z-30"
+      className="border-b border-fog bg-canvas/90 backdrop-blur-md sticky top-0 z-30"
     >
-      <div className="mx-auto max-w-prose px-6 md:px-10 py-5 flex items-center justify-between">
+      <div className="mx-auto max-w-prose px-6 md:px-10 h-16 flex items-center justify-between">
         <Logo />
-        <nav className="hidden md:flex items-center gap-9" aria-label="primary">
-          <a href="#days" className="kicker hover:text-bone transition-colors duration-300">Day-by-day</a>
-          <a href="#pricing" className="kicker hover:text-bone transition-colors duration-300">Pricing</a>
-          <a href="#faq" className="kicker hover:text-bone transition-colors duration-300">FAQ</a>
-          <ButtonAnchor href="#pricing" size="sm" className="ml-2">Take Growth →</ButtonAnchor>
+        <nav className="hidden md:flex items-center gap-8" aria-label="primary">
+          <a href="#days" className="text-[14px] font-medium text-void hover:underline underline-offset-4">Day-by-day</a>
+          <a href="#pricing" className="text-[14px] font-medium text-void hover:underline underline-offset-4">Pricing</a>
+          <a href="#faq" className="text-[14px] font-medium text-void hover:underline underline-offset-4">FAQ</a>
+          <ButtonAnchor href="#pricing" size="sm" variant="ghost" className="ml-2">Talk to dispatcher</ButtonAnchor>
+          <ButtonAnchor href="#pricing" size="sm">Take Growth →</ButtonAnchor>
         </nav>
         <div className="md:hidden">
           <ButtonAnchor href="#pricing" size="sm">Pricing →</ButtonAnchor>
@@ -61,15 +69,17 @@ function Logo() {
   return (
     <a href="#hero" className="flex items-center gap-3 group" aria-label="Dispatch — home">
       <span aria-hidden="true" className="inline-block">
-        <svg width="32" height="32" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
-          <rect x="0" y="0" width="64" height="64" rx="2" fill="#FAFAF8" />
-          <text x="32" y="42" textAnchor="middle"
-                fontFamily="Fraunces, Georgia, serif" fontWeight="900" fontSize="32"
-                fill="#0A1F1B">Dt</text>
-          <rect x="14" y="51" width="36" height="1.5" fill="#D45D6B" />
+        <svg width="28" height="28" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+          <rect x="0" y="0" width="64" height="64" rx="6" fill="#000000" />
+          <text
+            x="32" y="42" textAnchor="middle"
+            fontFamily="Fraunces, Georgia, serif"
+            fontWeight="700" fontSize="32" fill="#FFFFFF"
+          >Dt</text>
+          <rect x="14" y="51" width="36" height="1.5" fill="#C24656" />
         </svg>
       </span>
-      <span className="font-mono text-[11.5px] tracking-ledger uppercase text-bone transition-colors duration-300 group-hover:text-carmine">
+      <span className="font-sans text-[14px] font-medium tracking-tight text-void">
         dispatch<span className="text-carmine">.</span>
       </span>
     </a>
@@ -82,69 +92,39 @@ function Logo() {
 
 function Hero() {
   return (
-    <section id="hero" className="grain section relative overflow-hidden">
-      {/* Ambient depth — two ultra-subtle orbs behind the headline */}
-      <div
-        aria-hidden="true"
-        className="ambient-orb"
-        style={{
-          width: 520,
-          height: 520,
-          background: "#D45D6B",
-          top: -120,
-          right: -120,
-          opacity: 0.08
-        }}
-      />
-      <div
-        aria-hidden="true"
-        className="ambient-orb"
-        style={{
-          width: 640,
-          height: 640,
-          background: "#C9A267",
-          bottom: -200,
-          left: -200,
-          opacity: 0.05
-        }}
-      />
-      <div className="relative mx-auto max-w-prose px-6 md:px-10 pt-24 pb-28 md:pt-36 md:pb-40">
-        <div className="grid md:grid-cols-12 gap-10 items-end">
-          <div className="md:col-span-9">
-            <p className="kicker">A productized chatbot agency · est. 2026</p>
-            <span className="eyebrow-rule" aria-hidden="true" />
-            <h1 className="font-display font-black text-[56px] md:text-[88px] lg:text-[120px] leading-[0.94] tracking-tightest text-bone text-balance">
-              Spec on Monday.<br />
-              <span className="italic font-display font-normal text-graphite">Bot live by</span> Friday.
-            </h1>
-            <p className="mt-10 max-w-2xl font-display text-[22px] md:text-[26px] text-bone-dim leading-[1.4] tracking-[-0.005em]">
-              One knowledge base, three channels, one bill. We build a multilingual chatbot
-              for clinics, salons, brokerages, schools, and small shops — and we ship in
-              five working days, not six weeks.
-            </p>
-            <div className="mt-12 flex flex-wrap gap-3 items-center">
-              <ButtonAnchor href="#pricing" size="lg" aria-label="See pricing tiers">
-                See the three tiers →
-              </ButtonAnchor>
-              <ButtonAnchor
-                href="mailto:desk@chatbot-agency.prin7r.com?subject=Brief%20for%20a%20chatbot%20build"
-                size="lg"
-                variant="ghost"
-                aria-label="Email the dispatcher with your brief"
-              >
-                Talk to the dispatcher
-              </ButtonAnchor>
+    <section id="hero" className="section relative overflow-hidden bg-canvas">
+      <div className="relative mx-auto max-w-prose px-6 md:px-10 pt-28 pb-32 md:pt-40 md:pb-48">
+        <div className="flex flex-col items-start max-w-4xl">
+          <p className="kicker">A productized chatbot agency · est. 2026</p>
+          <span className="eyebrow-rule" aria-hidden="true" />
+          <h1 className="font-display font-semibold text-[56px] md:text-[88px] lg:text-[112px] leading-[0.96] tracking-tightest text-void text-balance">
+            Spec on Monday.<br />
+            <span className="italic font-display font-normal text-graphite">Bot live by</span> Friday.
+          </h1>
+          <p className="mt-10 max-w-2xl font-display text-[22px] md:text-[26px] text-graphite leading-[1.4] tracking-tight">
+            One knowledge base, three channels, one bill. We build a multilingual chatbot
+            for clinics, salons, brokerages, schools, and small shops — and we ship in
+            five working days, not six weeks.
+          </p>
+          <div className="mt-12 flex flex-wrap gap-3 items-center">
+            <ButtonAnchor href="#pricing" size="lg" aria-label="See the three pricing tiers">
+              See the three tiers →
+            </ButtonAnchor>
+            <ButtonAnchor
+              href="mailto:desk@chatbot-agency.prin7r.com?subject=Brief%20for%20a%20chatbot%20build"
+              size="lg"
+              variant="ghost"
+              aria-label="Email the dispatcher with your brief"
+            >
+              Talk to the dispatcher
+            </ButtonAnchor>
+          </div>
+          <div className="mt-14 flex items-center gap-4">
+            <div className="kickoff-stamp" aria-hidden="true">
+              <span className="pulse-dot" />
+              <span>Kickoff Monday · 09:30 local</span>
             </div>
           </div>
-          <aside
-            className="md:col-span-3 flex justify-start md:justify-end"
-            aria-hidden="true"
-          >
-            <div className="kickoff-stamp">
-              <span className="pulse-dot" />
-              <span>Kickoff Monday<br />09:30 local</span>
-            </div>
-          </aside>
         </div>
       </div>
     </section>
@@ -164,16 +144,16 @@ function ProofStripe() {
   ];
   return (
     <section id="proof" aria-label="Channels we ship to" className="section">
-      <div className="mx-auto max-w-prose px-6 md:px-10 py-20 md:py-24">
-        <div className="mb-10 flex items-center gap-4">
+      <div className="mx-auto max-w-prose px-6 md:px-10 py-24 md:py-28">
+        <div className="mb-12 flex items-center gap-4">
           <span className="kicker">Channels</span>
-          <span className="h-px flex-1 bg-bone/10" />
+          <span className="h-px flex-1 bg-fog" />
           <span className="kicker">Four rails</span>
         </div>
         <ul className="channel-row" role="list">
           {channels.map(({ glyph, label, index }) => (
             <li key={glyph}>
-              <span className="font-mono text-[10px] tracking-[0.22em] uppercase text-linen">{index}</span>
+              <span className="channel-index">{index}</span>
               <span className="glyph">{glyph}</span>
               <span className="channel-label">{label}</span>
             </li>
@@ -185,7 +165,7 @@ function ProofStripe() {
 }
 
 /* -------------------------------------------------------------------------- */
-/* Day-by-Day timeline                                                        */
+/* Day-by-Day timeline — cinematic whitespace per OpenAI reference            */
 /* -------------------------------------------------------------------------- */
 
 type Day = { num: string; day: string; title: string; body: string };
@@ -226,20 +206,22 @@ function DayByDay() {
 
   return (
     <section id="days" className="section">
-      <div className="mx-auto max-w-prose px-6 md:px-10 py-28 md:py-36">
+      <div className="mx-auto max-w-prose px-6 md:px-10 py-32 md:py-40">
         <SectionHeader
           eyebrow="The schedule"
           title="Five days, named."
           lede="No flow charts. No discovery sprint. No six-week SOW. We meet on Monday and your bot answers customers by Friday afternoon — same week."
         />
         <ol
-          className="mt-20 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-px bg-bone/[0.06] border border-bone/[0.06]"
+          className="mt-24 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-px bg-fog border border-fog"
           aria-label="Five-day delivery schedule"
         >
-          {days.map((day) => (
+          {days.map((day, idx) => (
             <li key={day.num} className="day-cell">
-              <span className="day-num">{day.num}</span>
-              <span className="day-label">{day.day} · day 0{day.num.replace(/^0/, "")}</span>
+              <span className="day-num">
+                <span className="day-num-accent">{day.num.charAt(0)}</span>{day.num.charAt(1)}
+              </span>
+              <span className="day-label">{day.day} · day 0{idx + 1}</span>
               <h3 className="day-title">{day.title}</h3>
               <p className="day-body">{day.body}</p>
             </li>
@@ -258,37 +240,37 @@ function ServiceBlock() {
   type Item = { kicker: string; title: string; body: string };
   const items: Item[] = [
     {
-      kicker: "kickoff doc",
+      kicker: "Kickoff doc",
       title: "A two-page brief, signed.",
       body:
         "Day-by-day plan, your single point of contact, refund clause, and the escalation runbook. Sent within 90 minutes of payment, before any building starts."
     },
     {
-      kicker: "weekly call",
+      kicker: "Weekly call",
       title: "Tuesday tuning, 15 min.",
       body:
         "We review the unanswered list (typically 8-15 DMs the bot punted), promote KB entries, adjust tone, and ship the diff before Friday."
     },
     {
-      kicker: "monthly report",
+      kicker: "Monthly report",
       title: "One-page accuracy PDF.",
       body:
         "Last Friday of the month: deflection rate, top intents, languages used, escalations, KB freshness. Numbered. No theme park dashboards."
     },
     {
-      kicker: "escalation",
+      kicker: "Escalation",
       title: "Owner handoff, by design.",
       body:
         "When confidence drops below threshold, the bot goes silent and pings you on Telegram. Your customer never gets a wrong answer in your name."
     },
     {
-      kicker: "fallback",
+      kicker: "Fallback",
       title: "Telegram in every contract.",
       body:
         "Meta tightens its WhatsApp policy; your bot keeps answering on Telegram. Single-channel agencies died in 2020 — we won't repeat that."
     },
     {
-      kicker: "refund",
+      kicker: "Refund",
       title: "Setup fee on the line.",
       body:
         "Don't see a 30% drop in unanswered messages in month one? We refund the setup fee. One sentence in the kickoff doc, no procedural theatre."
@@ -296,21 +278,21 @@ function ServiceBlock() {
   ];
 
   return (
-    <section id="service" className="section bg-ink-2">
-      <div className="mx-auto max-w-prose px-6 md:px-10 py-28 md:py-36">
+    <section id="service" className="section bg-milk">
+      <div className="mx-auto max-w-prose px-6 md:px-10 py-32 md:py-40">
         <SectionHeader
           eyebrow="What you get"
           title="A working studio, not a workspace."
           lede="The product is the delivery — the cadence, the artifacts, the human at the other end. The LLM is a tool we hold."
         />
-        <div className="mt-20 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-px bg-bone/[0.05] border border-bone/[0.05]">
+        <div className="mt-20 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
           {items.map((item) => (
-            <div key={item.kicker} className="dispatch-frame p-8 lg:p-10 flex flex-col gap-4">
+            <div key={item.kicker} className="dispatch-frame p-8 lg:p-10 flex flex-col gap-4 bg-canvas">
               <p className="kicker">{item.kicker}</p>
-              <h3 className="font-display font-semibold text-[24px] tracking-tightest leading-tight text-bone">
+              <h3 className="font-display font-semibold text-[22px] tracking-tight leading-[1.21] text-void">
                 {item.title}
               </h3>
-              <p className="text-[15px] text-bone-dim leading-[1.55]">{item.body}</p>
+              <p className="text-[15px] text-graphite leading-[1.55]">{item.body}</p>
             </div>
           ))}
         </div>
@@ -379,48 +361,52 @@ function Pricing() {
 
   return (
     <section id="pricing" className="section">
-      <div className="mx-auto max-w-prose px-6 md:px-10 py-28 md:py-36">
+      <div className="mx-auto max-w-prose px-6 md:px-10 py-32 md:py-40">
         <SectionHeader
           eyebrow="Three tiers"
           title="Setup fees non-negotiable."
           lede="The setup fee is the qualifying signal and the team's labour for week one. Annual prepay (two months free) is the only discount we offer."
         />
 
-        <div className="mt-20 grid grid-cols-1 md:grid-cols-3 gap-5">
+        <div className="mt-20 grid grid-cols-1 md:grid-cols-3 gap-6">
           {tiers.map((tier) => (
             <article key={tier.id} className={`tier ${tier.featured ? "featured" : ""}`} aria-label={`${tier.name} tier`}>
-              {tier.featured ? (
-                <span className="inline-flex w-fit items-center gap-2 border border-carmine/50 bg-carmine/10 px-3 py-1.5 font-mono text-[10px] tracking-[0.2em] uppercase text-carmine">
-                  <span className="inline-block w-1 h-1 rounded-full bg-carmine" />
-                  Most popular
-                </span>
-              ) : (
-                <span className="inline-flex w-fit font-mono text-[10px] tracking-[0.2em] uppercase text-linen">
-                  Tier {tier.id === "starter" ? "01" : tier.id === "growth" ? "02" : "03"}
-                </span>
-              )}
-              <h3 className="tier-name">{tier.name}</h3>
-              <p className="text-[14.5px] text-bone-dim leading-[1.5]">{tier.blurb}</p>
+              <div className="flex items-center justify-between">
+                {tier.featured ? (
+                  <span className="inline-flex items-center gap-2 rounded-full bg-chalk px-3 py-1.5 text-[11px] font-medium text-void">
+                    <span className="inline-block w-1 h-1 rounded-full bg-carmine" />
+                    Most popular
+                  </span>
+                ) : (
+                  <span className="text-[11px] font-medium text-graphite">
+                    Tier {tier.id === "starter" ? "01" : "03"}
+                  </span>
+                )}
+              </div>
 
-              <div className="mt-2">
+              <h3 className="tier-name mt-2">{tier.name}</h3>
+              <p className="text-[14px] text-graphite leading-[1.55]">{tier.blurb}</p>
+
+              <div className="mt-4">
                 <div className="tier-price">
-                  ${tier.setup} <span className="font-sans font-normal text-[12px] uppercase tracking-[0.18em] text-linen align-middle">setup</span>
+                  ${tier.setup}
+                  <span className="ml-2 text-[13px] font-sans font-medium text-graphite tracking-normal">setup</span>
                 </div>
-                <div className="tier-mo">
-                  <span className="font-display font-semibold text-bone">${tier.monthly}</span>
-                  <span className="text-linen"> / month thereafter</span>
+                <div className="tier-mo mt-1">
+                  <span className="font-sans font-medium text-void">${tier.monthly}</span>
+                  <span className="text-graphite"> / month thereafter</span>
                 </div>
               </div>
 
-              <ul className="tier-features">
+              <ul className="tier-features mt-4">
                 {tier.features.map((feature) => (
                   <li key={feature}>{feature}</li>
                 ))}
               </ul>
 
-              <div className="mt-auto pt-4">
-                <PricingCta plan={tier.id} label={`Take ${tier.name} →`} fullWidth variant={tier.featured ? "default" : "default"} />
-                <p className="mt-3 text-[10.5px] font-mono tracking-[0.2em] uppercase text-linen">
+              <div className="mt-auto pt-6">
+                <PricingCta plan={tier.id} label={`Take ${tier.name} →`} fullWidth />
+                <p className="mt-3 text-[11px] font-medium text-graphite">
                   NOWPayments · USDT / USDC
                 </p>
               </div>
@@ -428,21 +414,21 @@ function Pricing() {
           ))}
         </div>
 
-        <p className="mt-16 max-w-2xl font-display italic text-[20px] md:text-[24px] text-bone border-l border-carmine pl-6 leading-[1.4]">
+        <p className="mt-20 max-w-3xl font-display italic text-[24px] md:text-[28px] text-void leading-[1.3] border-l-2 border-carmine pl-6">
           If you don&rsquo;t see a 30% drop in unanswered messages in month one, we refund the setup fee.
         </p>
 
         <div className="mt-16 dispatch-frame p-8 lg:p-10 max-w-2xl">
           <p className="kicker">Resellers · white label</p>
-          <h3 className="mt-4 font-display font-semibold text-[22px] tracking-tightest text-bone leading-tight">
+          <h3 className="mt-3 font-display font-semibold text-[22px] tracking-tight text-void leading-[1.21]">
             Web studios &amp; marketing shops — 40% margin.
           </h3>
-          <p className="mt-3 text-[15px] text-bone-dim leading-[1.55]">
+          <p className="mt-3 text-[15px] text-graphite leading-[1.55]">
             One-page partner agreement, contract minimum five seats over twelve months, joint kickoff
             on the first three referrals. Email the desk and we&rsquo;ll send the agreement back same day.
           </p>
           <a
-            className="inline-block mt-5 font-mono text-[11px] tracking-[0.2em] uppercase text-bone underline decoration-1 underline-offset-4 decoration-carmine hover:text-carmine transition-colors duration-300"
+            className="inline-block mt-4 text-[14px] font-medium text-void underline decoration-1 underline-offset-4 hover:text-carmine transition-colors duration-200"
             href="mailto:partners@chatbot-agency.prin7r.com?subject=Partner%20studio%20interest"
           >
             partners@chatbot-agency.prin7r.com →
@@ -466,25 +452,25 @@ function SchedStrip() {
     { d: "Fri", c: "Live" }
   ];
   return (
-    <section id="sched" className="section bg-ink-2">
-      <div className="mx-auto max-w-prose px-6 md:px-10 py-20 md:py-24">
-        <div className="flex items-center gap-4 mb-10">
-          <span className="font-mono text-[11px] tracking-[0.22em] uppercase text-linen">A typical week</span>
-          <span className="h-px flex-1 bg-bone/10" />
+    <section id="sched" className="section bg-milk">
+      <div className="mx-auto max-w-prose px-6 md:px-10 py-24 md:py-28">
+        <div className="flex items-center gap-4 mb-12">
+          <span className="kicker">A typical week</span>
+          <span className="h-px flex-1 bg-fog" />
         </div>
-        <div className="grid grid-cols-5 gap-px bg-bone/[0.06] border border-bone/[0.06]">
+        <div className="grid grid-cols-5 gap-px bg-fog border border-fog rounded-[6.08px] overflow-hidden">
           {cells.map((cell, i) => (
-            <div key={cell.d} className="bg-ink-2 p-5 md:p-7 flex flex-col gap-3">
-              <span className="font-mono text-[10px] tracking-[0.2em] uppercase text-linen">
+            <div key={cell.d} className="bg-canvas p-6 md:p-8 flex flex-col gap-3">
+              <span className="font-mono text-[10px] tracking-[0.18em] uppercase text-graphite">
                 Day 0{i + 1} · {cell.d}
               </span>
-              <span className="font-display font-medium text-[18px] md:text-[22px] tracking-tightest text-bone leading-tight">
+              <span className="font-display font-medium text-[18px] md:text-[22px] tracking-tight text-void leading-[1.21]">
                 {cell.c}
               </span>
             </div>
           ))}
         </div>
-        <p className="mt-10 max-w-2xl font-display italic text-[19px] text-bone-dim leading-[1.45]">
+        <p className="mt-12 max-w-2xl font-display italic text-[20px] text-graphite leading-[1.4]">
           Plain dispatch. No theme park demos. No flow charts. No six-week SOW.
         </p>
       </div>
@@ -526,9 +512,9 @@ function Faq() {
 
   return (
     <section id="faq" className="section">
-      <div className="mx-auto max-w-prose px-6 md:px-10 py-28 md:py-36">
+      <div className="mx-auto max-w-prose px-6 md:px-10 py-32 md:py-40">
         <SectionHeader eyebrow="FAQ" title="Six questions, answered straight." />
-        <div className="mt-16 max-w-2xl">
+        <div className="mt-16 max-w-3xl">
           {items.map((item) => (
             <details key={item.q} className="faq">
               <summary>{item.q}</summary>
@@ -547,46 +533,47 @@ function Faq() {
 
 function Footer() {
   return (
-    <footer id="footer" className="bg-ink-2 border-t border-bone/[0.05]">
+    <footer id="footer" className="bg-canvas border-t border-fog">
       <div className="mx-auto max-w-prose px-6 md:px-10 py-20 md:py-24 grid md:grid-cols-12 gap-10 items-start">
         <div className="md:col-span-6 flex flex-col gap-5">
           <Logo />
-          <p className="max-w-md text-[14.5px] text-bone-dim leading-[1.55]">
+          <p className="max-w-md text-[14px] text-graphite leading-[1.65]">
             Dispatch is a productized chatbot agency. Spec on Monday, bot live by Friday. One
             knowledge base, three channels, one bill. Built in 2026 by the prin7r-projects
             studio.
           </p>
         </div>
-        <nav className="md:col-span-3 flex flex-col gap-4" aria-label="footer">
-          <p className="kicker">The desk</p>
-          <a className="text-[14px] text-bone hover:text-carmine transition-colors duration-300" href="mailto:desk@chatbot-agency.prin7r.com">
+        <nav className="md:col-span-3 flex flex-col gap-3" aria-label="footer">
+          <p className="text-[13px] font-semibold text-void tracking-[0.143px]">The desk</p>
+          <a className="text-[13px] text-graphite hover:text-void hover:underline underline-offset-4" href="mailto:desk@chatbot-agency.prin7r.com">
             desk@chatbot-agency.prin7r.com
           </a>
-          <a className="text-[14px] text-bone hover:text-carmine transition-colors duration-300" href="mailto:partners@chatbot-agency.prin7r.com">
+          <a className="text-[13px] text-graphite hover:text-void hover:underline underline-offset-4" href="mailto:partners@chatbot-agency.prin7r.com">
             partners@chatbot-agency.prin7r.com
           </a>
         </nav>
-        <nav className="md:col-span-3 flex flex-col gap-4" aria-label="resources">
-          <p className="kicker">Repo · docs</p>
+        <nav className="md:col-span-3 flex flex-col gap-3" aria-label="resources">
+          <p className="text-[13px] font-semibold text-void tracking-[0.143px]">Repo · docs</p>
           <Link
-            className="text-[14px] text-bone hover:text-carmine transition-colors duration-300 break-all"
+            className="text-[13px] text-graphite hover:text-void hover:underline underline-offset-4 break-all"
             href="https://github.com/prin7r-projects/chatbot-agency"
           >
             github.com/prin7r-projects/chatbot-agency
           </Link>
           <Link
-            className="text-[14px] text-bone hover:text-carmine transition-colors duration-300"
+            className="text-[13px] text-graphite hover:text-void hover:underline underline-offset-4"
             href="https://github.com/prin7r-projects/chatbot-agency/tree/main/docs"
           >
             10 strategy docs
           </Link>
         </nav>
       </div>
-      <div className="mx-auto max-w-prose px-6 md:px-10 pb-10 flex flex-col md:flex-row justify-between gap-3 border-t border-bone/[0.06] pt-8">
-        <p className="font-mono text-[10.5px] tracking-[0.2em] uppercase text-linen">
+      {/* Single discrete forest accent — kept as inline emphasis not background. */}
+      <div className="mx-auto max-w-prose px-6 md:px-10 pb-10 flex flex-col md:flex-row justify-between gap-3 border-t border-fog pt-8">
+        <p className="text-[12px] text-graphite tracking-[0.143px]">
           © 2026 prin7r-projects · MIT
         </p>
-        <p className="font-mono text-[10.5px] tracking-[0.2em] uppercase text-linen">
+        <p className="text-[12px] text-graphite tracking-[0.143px]">
           Plain dispatch · no theme park demos
         </p>
       </div>
@@ -608,13 +595,13 @@ function SectionHeader({
   lede?: string;
 }) {
   return (
-    <div className="max-w-2xl">
+    <div className="max-w-3xl">
       <p className="kicker">{eyebrow}</p>
       <span className="eyebrow-rule" aria-hidden="true" />
-      <h2 className="font-display font-medium text-[40px] md:text-[64px] leading-[1.02] tracking-tightest text-bone text-balance">
+      <h2 className="font-display font-semibold text-[40px] md:text-[56px] lg:text-[64px] leading-[1.05] tracking-tightest text-void text-balance">
         {title}
       </h2>
-      {lede ? <p className="mt-7 text-[17px] md:text-[19px] text-bone-dim leading-[1.55] max-w-xl">{lede}</p> : null}
+      {lede ? <p className="mt-7 text-[18px] md:text-[20px] text-graphite leading-[1.55] max-w-2xl">{lede}</p> : null}
     </div>
   );
 }

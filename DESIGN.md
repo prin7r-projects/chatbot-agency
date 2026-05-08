@@ -11,7 +11,7 @@ The visual identity is sourced from [`docs/01-brand-identity.md`](docs/01-brand-
 
 **Product** — Dispatch is a productized chatbot agency that delivers a working multilingual bot to Telegram, Discord, and WhatsApp from one knowledge base in five working days. The product is the *delivery cadence*, not the platform: kickoff Monday, channels wired by Wednesday, owner handoff Thursday, live Friday. The subscription pays for the weekly tuning hour and the monthly accuracy report — the part that keeps the bot true to a salon's actual prices, hours, and calendar.
 
-**Wave 2 redesign 2026-05-08.** The visual identity is now a confident dark canvas (deep forest `#0A1F1B`) with off-white surfaces (`#FAFAF8` bone). The editorial-dispatch register is unchanged — the masthead-rule typography, the schedule-as-promise, the carmine accent, the kickoff stamp — but the ambient feel is now an after-hours dispatch room rather than a daylight broadsheet. The brand essence (editorial dispatch, schedule-as-promise) and all copy stayed identical; the canvas, surfaces, and grotesk family rotated.
+**Wave 2 round-2 redesign 2026-05-08 — OpenAI reference applied.** The visual identity is now a pure-white editorial canvas (`#FFFFFF`) per the OpenAI design reference at [`/Users/keer/projects/prin7r/design-references/openai.md`](file:///Users/keer/projects/prin7r/design-references/openai.md). The page reads like a blank dispatch sheet waiting to be filled — typography does the work, whitespace does the rest. Color is achromatic (1% colorfulness): `#000000` for primary text, `#666666` for secondary, `#E5E7EB` for every divider, `#F1F1F1` for hover surfaces, `#FAFAF8` for the one milky section band that breaks rhythm. Carmine `#C24656` is the brand essence retained — but now reserved for **four decisive moments only**: (1) the kickoff-stamp pulse dot, (2) the leading numeral of each day-cell, (3) the 2px top rule on the featured pricing tier, and (4) the italic refund clause's left border. The 28px eyebrow rule under each section header is the fifth and final carmine touch. Inter is BANNED — Geist carries body/UI; Fraunces stays for editorial display moments. Two radii rule the system: 9999px for pills (every interactive button + the kickoff stamp + soft chips) and 6.08px for cards. The brand essence (editorial dispatch, schedule-as-promise) and all copy stayed identical; the canvas, palette, button shapes, and section rhythm rotated.
 
 **Audience** —
 - **Anya, the salon owner / clinic operator**: 32-44, runs a 3-12 person beauty studio, dental practice, or fitness studio in a Russian-speaking city or LATAM mirror. 60-200 inbound DMs/day. Tried ManyChat, abandoned it. Wants a bot, not a builder.
@@ -41,35 +41,39 @@ A working chatbot studio dressed as an editorial dispatch room.
 
 ## 4. Color tokens
 
-Single source of truth: `apps/landing/tailwind.config.ts` and `apps/landing/app/globals.css`. Five-color editorial palette; intentionally not a SaaS dashboard palette and intentionally not the chat-bubble-blue / AI-mint default.
+Single source of truth: `apps/landing/tailwind.config.ts` and `apps/landing/app/globals.css`. Round-2 palette is achromatic (1% colorfulness) per the OpenAI reference — color is reserved for editorial accents, never UI surfaces.
 
 | Role | Token | Hex | CSS var | Used for |
 |------|-------|-----|---------|----------|
-| Surface (page) | `cream` | `#F4EDE0` | `--cream` | Page background, card surfaces |
-| Surface (band) | `cream-2` | `#EAE0CD` | `--cream-2` | Section bands, day-by-day timeline, the kickoff stamp body |
-| Ink | `forest` | `#0F2A26` | `--forest` | All body copy, primary buttons, masthead rule |
-| Ink (subdued) | `graphite` | `#1F2422` | `--graphite` | Hairline rules, dossier frame, bullets |
-| Muted | `linen` | `#857C71` | `--linen` | Captions, monoglyph stripe, JetBrains Mono labels |
-| Accent | `carmine` | `#C24656` | `--carmine` | Day numerals, hero accent rule, citation rules, hover states |
-| Highlight | `cedar` | `#A07A2C` | `--cedar` | Pulse dot, kickoff stamp, sparing editorial callouts |
+| Surface (page) | `canvas` | `#FFFFFF` | `--canvas` | Page background — pure white, wall-to-wall |
+| Surface (band) | `milk` | `#FAFAF8` | `--milk` | The single section band that breaks rhythm (`#service`, `#sched`) |
+| Hover surface | `chalk` | `#F1F1F1` | `--chalk` | Hover-state button background, soft chips |
+| Border | `fog` | `#E5E7EB` | `--fog` | Every divider, card outline, input border, nav underline |
+| Tertiary | `ash` | `#8F8F8F` | `--ash` | Disabled states, fine-grain icon strokes |
+| Secondary text | `graphite` | `#666666` | `--graphite` | All secondary body copy, captions, kickers |
+| Primary text | `void` | `#000000` | `--void` | Primary text, headlines, filled CTA background |
+| Brand accent | `carmine` | `#C24656` | `--carmine` | Reserved for four decisive moments: pulse dot, day-numeral leading digit, featured-tier 2px top rule, refund clause left border. Plus the 28px eyebrow rule under each section header. |
+| Brand essence | `forest` | `#0F2A26` | `--forest` | Discrete inline emphasis only — never as a surface or background. Held in reserve for future editorial callouts. |
 
-**Contrast.** All foreground/background combinations meet WCAG AA: forest-on-cream 11.7:1; graphite-on-cream 10.6:1; linen-on-cream 4.6:1 (use only at 14px+); carmine-on-cream 4.6:1; cream-on-forest 11.7:1; cedar-on-forest 5.4:1.
+**Contrast.** All foreground/background combinations meet WCAG AA: void-on-canvas 21:1; graphite-on-canvas 5.7:1; ash-on-canvas 3.5:1 (use only at 18px+); carmine-on-canvas 4.6:1; canvas-on-void 21:1.
 
-**Forbidden combinations.** Carmine text on cedar; linen on cream-2 below 14px; cedar text on cream below 16px; any color on a gradient.
+**Forbidden combinations.** Color blocks on backgrounds (the page is `#FFFFFF` wall-to-wall); carmine on chalk; ash text below 18px; cedar text on canvas below 16px; any color on a gradient.
 
 ## 5. Typography
 
-Three families. No fourth font. Pairing is deliberately *not* the all-sans tech aesthetic — Dispatch reads as a working studio, not as a SaaS.
+Three families. **Inter is BANNED** — Geist replaces it as the body/UI grotesk per the round-2 redesign. The pairing is deliberately *not* the all-sans tech aesthetic — Dispatch reads as a working studio dressed for an editorial dispatch room.
 
 | Role | Family | Weights | Used at | Reason |
 |------|--------|---------|---------|--------|
-| Display | **Fraunces** | 400, 600, 900 (+ italic 400) | Hero 56-112px, sections 40-56px, long-form 18-26px | Optical-sized serif tuned for both display and body; reads as an old-school studio nameplate, not a startup. |
-| Body | **Inter** | 400, 500, 600 | Body 15-17px, UI 14px, labels 11px | Neutral, high-legibility sans; pairs cleanly with Fraunces. |
-| Mono | **JetBrains Mono** | 400, 500 | Day numerals (display 48-88px), monoglyph stripe `tg.` `wa.` `dc.`, captions in 11px caps | Wide character body; reads as machine output rather than copy. |
+| Display | **Fraunces** | 400, 500, 600 (+ italic 400) | Hero 88-112px, sections 40-64px, long-form 22-28px | Optical-sized serif tuned for both display and body; the carved-headline feel matches OpenAI's tightly-tracked compressed display register, but in serif form. |
+| Body / UI | **Geist** | 400, 500, 600 | Body 14-17px, UI 13-14px, kickers 13px | Premium grotesk by Vercel — wider counters than Inter and a calmer rhythm at body sizes. Replaces Inter per the round-2 ban. |
+| Mono | **JetBrains Mono** | 400, 500 | Channel monoglyph stripe `tg. · wa. · dc. · web.`, kickoff-stamp caption, mono kickers, FAQ "+/−" affordance | Wide character body; reads as machine output rather than copy. |
 
-Loaded from Google Fonts in `globals.css` with `display=swap`. The pairing rationale is documented in [`docs/01-brand-identity.md`](docs/01-brand-identity.md) — a serif display + neutral sans body + monoglyph numerals is the editorial-dispatch pairing.
+Loaded from Google Fonts in `globals.css` with `display=swap`. The pairing rationale is documented in [`docs/01-brand-identity.md`](docs/01-brand-identity.md) — a serif display + premium grotesk body + monoglyph for machine moments is the editorial-dispatch pairing.
 
-**Type scale (display).** 18 / 22 / 28 / 34 / 40 / 44 / 56 / 64 / 88 / 112 px. **Body scale.** 11 / 12 / 13 / 14 / 15 / 17 / 19 / 22 px. **Letter-spacing.** Display tightens by `-0.012em`; mono labels open to `2px` for caps.
+**Type scale (display).** Per OpenAI: 13 / 22 / 28 / 48 px as the canonical scale, extended for Dispatch's editorial hero to 56 / 72 / 88 / 96 / 112 px so the headline still feels carved. **Body scale.** 11 / 12 / 13 / 14 / 15 / 16 / 17 / 18 / 22 px. **Letter-spacing.** Display tightens by `-0.03em` at 96-112px (carved); `-0.012em` at 22-64px; flat at body 16-18px; positive `+0.143px` (`+0.011em`) only on 13px caps labels and kickers. Display weight is **600** for headlines, never 700 or 900 — a deliberate softening from round 1's Fraunces Black to feel more expensive and less dramatic.
+
+**Whitespace ratios.** Section gaps `py-32 md:py-40` (128-160px) per OpenAI's 64-80px section-gap minimum, doubled for Dispatch's editorial register. The hero runs `pt-40 md:pb-48` (160-192px) — the headline is allowed to breathe before any other element appears. Day-cells run `min-height: 360px` and `padding: 56px 32px 48px` to give each numeral cinematic stage time.
 
 ## 6. Spacing, radius, shadows, and borders
 
@@ -181,3 +185,5 @@ Captured via Playwright headless Chromium on the deployed URL (not localhost). R
 |---|---|---|
 | 2026-05-08 | Initial wave-2 build. Hero, day-by-day, proof strip, service block, pricing, sched strip, FAQ, footer. NOWPayments hosted-invoice CTA + IPN webhook wired. Vendored ShadCN `Button` + `Card`. | `apps/landing/` |
 | 2026-05-08 | DESIGN.md authored at root. 10 strategy docs published under `docs/`. Pitch deck HTML + Markdown shipped. Desktop + mobile screenshots captured against production. | repo root + `docs/` |
+| 2026-05-08 | Round-1 redesign attempt — pivoted to dark-forest canvas with bone ink. Stalled mid-flight; committed as a checkpoint and overwritten by round 2. | `apps/landing/` (reverted) |
+| 2026-05-08 | **Round-2 redesign — OpenAI reference applied.** Canvas pivots to pure white `#FFFFFF`. Achromatic palette (void/graphite/ash/fog/chalk/milk). Carmine reserved for four decisive moments only (kickoff pulse, day-numeral leading digit, featured-tier top rule, refund-clause border) plus the section eyebrow rule. Inter banned, Geist becomes the grotesk. Two-radii system: 9999px pill buttons + 6.08px cards. Whitespace doubled per OpenAI section-gap doctrine. `Button`, `Card`, `PricingCta` re-themed to pill + 6.08px. Day-cells given cinematic stage time (`min-height: 360px`). DESIGN.md §1 / §4 / §5 / §15 updated. | `apps/landing/` + DESIGN.md |

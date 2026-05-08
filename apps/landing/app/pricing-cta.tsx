@@ -6,6 +6,8 @@
  * Posts to /api/checkout/nowpayments and redirects to the hosted invoice URL.
  * Falls back to a mailto when JS is disabled (the <noscript> partner-CTA in
  * the footer covers that audience).
+ *
+ * Round-2 redesign 2026-05-08 — OpenAI pill button styling.
  */
 
 import * as React from "react";
@@ -53,11 +55,11 @@ export function PricingCta({ plan, label, variant = "default", fullWidth = false
     }
   }
 
-  // Wave 2 redesign 2026-05-08: dark canvas → primary CTA is bone-fill ink-text.
+  // Round-2 redesign 2026-05-08 — pill button per OpenAI reference.
   const baseClass =
     variant === "ghost"
-      ? "inline-flex items-center justify-center gap-2 h-12 px-5 text-[15px] font-medium font-sans border border-bone/25 text-bone bg-transparent hover:bg-bone hover:text-ink hover:border-bone hover:-translate-y-[1px] transition-all duration-300 ease-[cubic-bezier(0.32,0.72,0,1)] focus-visible:outline focus-visible:outline-1 focus-visible:outline-offset-2 focus-visible:outline-carmine rounded-none disabled:opacity-50 disabled:cursor-not-allowed active:scale-[0.98]"
-      : "inline-flex items-center justify-center gap-2 h-12 px-5 text-[15px] font-medium font-sans border border-bone bg-bone text-ink hover:bg-carmine hover:text-bone hover:border-carmine hover:-translate-y-[1px] transition-all duration-300 ease-[cubic-bezier(0.32,0.72,0,1)] focus-visible:outline focus-visible:outline-1 focus-visible:outline-offset-2 focus-visible:outline-carmine rounded-none disabled:opacity-50 disabled:cursor-not-allowed active:scale-[0.98]";
+      ? "inline-flex items-center justify-center gap-2 h-11 px-5 text-[14px] font-medium font-sans leading-none rounded-full border border-[rgba(0,0,0,0.12)] text-void bg-transparent hover:bg-chalk transition-colors duration-200 ease-[cubic-bezier(0.32,0.72,0,1)] focus-visible:outline focus-visible:outline-1 focus-visible:outline-offset-2 focus-visible:outline-carmine disabled:opacity-50 disabled:cursor-not-allowed active:scale-[0.99]"
+      : "inline-flex items-center justify-center gap-2 h-11 px-5 text-[14px] font-medium font-sans leading-none rounded-full border border-void bg-void text-canvas hover:bg-[#1a1a1a] hover:border-[#1a1a1a] transition-colors duration-200 ease-[cubic-bezier(0.32,0.72,0,1)] focus-visible:outline focus-visible:outline-1 focus-visible:outline-offset-2 focus-visible:outline-carmine disabled:opacity-50 disabled:cursor-not-allowed active:scale-[0.99] shadow-sm";
 
   return (
     <div className={fullWidth ? "w-full" : undefined}>

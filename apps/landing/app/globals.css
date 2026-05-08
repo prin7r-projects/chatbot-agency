@@ -3,37 +3,43 @@
 @tailwind utilities;
 
 /* ---------------------------------------------------------------------------
-   [DISPATCH_GLOBALS] Wave 2 redesign 2026-05-08.
-   Editorial-dispatch baseline pivoted to a confident dark canvas.
-   Five-color print palette retained but inverted: deep forest as the page,
-   bone (off-white) as the ink. Inter is BANNED — Geist is the grotesk.
-   Fraunces stays for editorial display.
-   The palette + type system are documented in /DESIGN.md sections 4-6.
+   [DISPATCH_GLOBALS] Round-2 redesign 2026-05-08 — OpenAI reference applied.
+
+   Canvas: pure white (#FFFFFF). Achromatic palette — color is reserved for
+   editorial moments, never UI. Two radii: 9999px pills + 6.08px cards.
+   Inter is BANNED — Geist carries body/UI; Fraunces stays for editorial.
+   Reference: /Users/keer/projects/prin7r/design-references/openai.md
    --------------------------------------------------------------------------- */
 
 @import url("https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,900&family=Fraunces:ital,opsz,wght@1,9..144,400;1,9..144,500&family=Geist:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap");
 
 :root {
-  /* New Wave 2 tokens — primary names */
-  --ink: #0A1F1B;
-  --ink-2: #0E2622;
-  --ink-3: #143028;
-  --bone: #FAFAF8;
-  --bone-dim: #E7E2D7;
-  --graphite: #C7C2B6;
-  --linen: #8A8275;
-  --carmine: #D45D6B;
-  --cedar: #C9A267;
+  /* Round-2 OpenAI tokens */
+  --canvas: #FFFFFF;
+  --milk: #FAFAF8;
+  --chalk: #F1F1F1;
+  --fog: #E5E7EB;
+  --ash: #8F8F8F;
+  --graphite: #666666;
+  --void: #000000;
 
-  /* Legacy aliases — keep cream/forest/cream-2 utilities resolving */
-  --cream: var(--bone);
-  --cream-2: var(--ink-2);
-  --forest: var(--ink);
+  /* Brand essence — used sparingly */
+  --forest: #0F2A26;
+  --carmine: #C24656;
+
+  /* Legacy aliases — preserve existing class names */
+  --cream: var(--canvas);
+  --bone: var(--canvas);
+  --ink: var(--void);
+  --ink-2: var(--milk);
+  --ink-3: var(--chalk);
+  --linen: var(--ash);
+  --cedar: #A07A2C;
 }
 
 html {
-  background: var(--ink);
-  color: var(--bone);
+  background: var(--canvas);
+  color: var(--void);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -43,17 +49,18 @@ body {
   font-size: 16px;
   line-height: 1.55;
   letter-spacing: -0.005em;
-  background: var(--ink);
-  color: var(--bone);
+  background: var(--canvas);
+  color: var(--void);
   font-feature-settings: "ss01", "cv11";
 }
 
 ::selection {
-  background: var(--carmine);
-  color: var(--ink);
+  background: var(--void);
+  color: var(--canvas);
 }
 
-/* Focus ring — visible carmine outline, 2px offset. */
+/* Focus ring — visible carmine outline, 2px offset (OpenAI uses black; we
+   keep carmine since it is our single brand accent and meets WCAG). */
 :focus-visible {
   outline: 1.5px solid var(--carmine);
   outline-offset: 2px;
@@ -64,108 +71,116 @@ body {
   position: absolute;
   left: -9999px;
   top: 8px;
-  background: var(--bone);
-  color: var(--ink);
+  background: var(--void);
+  color: var(--canvas);
   padding: 8px 12px;
   font-family: "JetBrains Mono", monospace;
   font-size: 11px;
   letter-spacing: 0.16em;
   text-transform: uppercase;
   z-index: 100;
+  border-radius: 9999px;
 }
 .skip-link:focus { left: 8px; }
 
 /* --- Local components ---------------------------------------------------- */
 
+/* Filled pill CTA — OpenAI's "Try ChatGPT" pattern.
+   #000000 fill, white text, 9999px radius, near-invisible shadow. */
 .btn {
   display: inline-flex;
   align-items: center;
-  gap: 10px;
-  background: var(--bone);
-  color: var(--ink);
+  gap: 8px;
+  background: var(--void);
+  color: var(--canvas);
   font-family: "Geist", sans-serif;
   font-weight: 500;
-  font-size: 15px;
-  padding: 14px 22px;
-  border-radius: 0;
-  border: 1px solid var(--bone);
+  font-size: 14px;
+  line-height: 1;
+  padding: 12px 20px;
+  border-radius: 9999px;
+  border: 1px solid var(--void);
   text-decoration: none;
-  transition: background 320ms cubic-bezier(0.32, 0.72, 0, 1),
-              border-color 320ms cubic-bezier(0.32, 0.72, 0, 1),
-              color 320ms cubic-bezier(0.32, 0.72, 0, 1),
-              transform 320ms cubic-bezier(0.32, 0.72, 0, 1);
+  transition: background 280ms cubic-bezier(0.32, 0.72, 0, 1),
+              border-color 280ms cubic-bezier(0.32, 0.72, 0, 1),
+              color 280ms cubic-bezier(0.32, 0.72, 0, 1);
   cursor: pointer;
+  box-shadow: rgba(0, 0, 0, 0.02) 0px 4px 6px 0px, rgba(0, 0, 0, 0.05) 0px 0px 2px 0px;
 }
-.btn:hover { background: var(--carmine); border-color: var(--carmine); color: var(--bone); transform: translateY(-1px); }
-.btn:active { transform: translateY(0); }
+.btn:hover { background: #1a1a1a; border-color: #1a1a1a; }
+.btn:active { background: #000; }
 .btn:disabled { opacity: .5; cursor: not-allowed; }
 
+/* Ghost pill — transparent with hairline border. Hover surface = chalk. */
 .btn-ghost {
   display: inline-flex;
   align-items: center;
-  gap: 10px;
+  gap: 8px;
   background: transparent;
-  color: var(--bone);
+  color: var(--void);
   font-family: "Geist", sans-serif;
   font-weight: 500;
-  font-size: 15px;
-  padding: 14px 22px;
-  border-radius: 0;
-  border: 1px solid rgba(250, 250, 248, .25);
+  font-size: 14px;
+  line-height: 1;
+  padding: 12px 20px;
+  border-radius: 9999px;
+  border: 1px solid rgba(0, 0, 0, .12);
   text-decoration: none;
-  transition: background 320ms cubic-bezier(0.32, 0.72, 0, 1),
-              color 320ms cubic-bezier(0.32, 0.72, 0, 1),
-              border-color 320ms cubic-bezier(0.32, 0.72, 0, 1);
+  transition: background 280ms cubic-bezier(0.32, 0.72, 0, 1),
+              border-color 280ms cubic-bezier(0.32, 0.72, 0, 1);
   cursor: pointer;
 }
-.btn-ghost:hover { background: var(--bone); color: var(--ink); border-color: var(--bone); }
+.btn-ghost:hover { background: var(--chalk); }
 
+/* Caption / kicker — OpenAI 13px caps with positive tracking. */
 .kicker {
+  font-family: "Geist", sans-serif;
+  font-size: 13px;
+  letter-spacing: 0.143px;
+  font-weight: 500;
+  color: var(--graphite);
+  text-transform: none;
+}
+
+/* Mono kicker for monoglyph contexts (channels, kickoff stamp). */
+.mono-kicker {
   font-family: "JetBrains Mono", monospace;
   font-size: 11px;
   letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: var(--linen);
+  color: var(--graphite);
   font-weight: 500;
 }
 
+/* The single editorial accent — a 28px carmine rule under section eyebrows.
+   Reserved for the four most decisive moments: hero, days, pricing, refund. */
 .eyebrow-rule {
   display: block;
   width: 28px;
-  height: 1px;
+  height: 1.5px;
   background: var(--carmine);
   margin: 14px 0 18px;
 }
 
+/* Soft-edge content frame — 6.08px radius, fog-border hairline, no shadow. */
 .dispatch-frame {
-  background: var(--ink-2);
-  border: 1px solid rgba(250, 250, 248, .08);
+  background: var(--canvas);
+  border: 1px solid var(--fog);
+  border-radius: 6.08px;
   position: relative;
-  transition: border-color 480ms cubic-bezier(0.32, 0.72, 0, 1),
-              background 480ms cubic-bezier(0.32, 0.72, 0, 1),
-              transform 480ms cubic-bezier(0.32, 0.72, 0, 1);
-}
-.dispatch-frame::after {
-  content: "";
-  position: absolute;
-  inset: 8px;
-  border: 1px solid rgba(250, 250, 248, .04);
-  pointer-events: none;
-  transition: border-color 480ms cubic-bezier(0.32, 0.72, 0, 1);
+  transition: border-color 320ms cubic-bezier(0.32, 0.72, 0, 1);
 }
 .dispatch-frame:hover {
-  border-color: rgba(250, 250, 248, .14);
-  background: var(--ink-3);
-  transform: translateY(-2px);
-}
-.dispatch-frame:hover::after {
-  border-color: rgba(250, 250, 248, .08);
+  border-color: rgba(0, 0, 0, .25);
 }
 
+/* Kickoff stamp — milky surface, hairline border, cedar pulse. The one
+   element that animates in steady state. */
 .kickoff-stamp {
-  background: var(--ink-2);
-  border: 1px solid rgba(250, 250, 248, .12);
-  padding: 14px 18px;
+  background: var(--milk);
+  border: 1px solid var(--fog);
+  border-radius: 9999px;
+  padding: 10px 16px;
   display: inline-flex;
   align-items: center;
   gap: 10px;
@@ -173,17 +188,16 @@ body {
   font-size: 11px;
   letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: var(--bone-dim);
+  color: var(--graphite);
 }
 
 .pulse-dot {
   display: inline-block;
-  width: 8px;
-  height: 8px;
-  background: var(--cedar);
+  width: 6px;
+  height: 6px;
+  background: var(--carmine);
   border-radius: 50%;
   animation: pulse 1.6s ease-in-out infinite;
-  box-shadow: 0 0 12px 0 rgba(201, 162, 103, .55);
 }
 
 @keyframes pulse {
@@ -199,219 +213,192 @@ body {
 .monoglyph {
   font-family: "JetBrains Mono", monospace;
   font-weight: 500;
-  letter-spacing: 0.18em;
+  letter-spacing: 0.04em;
   text-transform: lowercase;
-  color: var(--bone);
+  color: var(--void);
 }
 
 .hairline {
   height: 1px;
-  background: rgba(250, 250, 248, .08);
+  background: var(--fog);
 }
 
 .carmine-rule {
-  height: 1px;
+  height: 1.5px;
   background: var(--carmine);
-  opacity: .85;
 }
 
 .section {
-  border-bottom: 1px solid rgba(250, 250, 248, .06);
+  border-bottom: 1px solid var(--fog);
 }
 
-/* --- Channel monoglyph stripe (refined: hairlines + monospace) ----------- */
+/* --- Channel monoglyph stripe ------------------------------------------- */
 
 .channel-row {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  border-top: 1px solid rgba(250, 250, 248, .12);
-  border-bottom: 1px solid rgba(250, 250, 248, .12);
+  border-top: 1px solid var(--fog);
+  border-bottom: 1px solid var(--fog);
 }
 .channel-row > li {
   position: relative;
-  padding: 36px 24px;
+  padding: 40px 28px;
   display: flex;
   flex-direction: column;
-  gap: 10px;
-  transition: background 480ms cubic-bezier(0.32, 0.72, 0, 1);
+  gap: 12px;
 }
 .channel-row > li + li::before {
   content: "";
   position: absolute;
   left: 0;
-  top: 24px;
-  bottom: 24px;
+  top: 28px;
+  bottom: 28px;
   width: 1px;
-  background: rgba(250, 250, 248, .08);
-}
-.channel-row > li:hover {
-  background: rgba(212, 93, 107, .04);
+  background: var(--fog);
 }
 .channel-row .glyph {
   font-family: "JetBrains Mono", monospace;
   font-weight: 500;
-  font-size: 28px;
+  font-size: 32px;
   letter-spacing: -0.01em;
-  color: var(--bone);
+  color: var(--void);
   text-transform: lowercase;
+  line-height: 1;
 }
 .channel-row .channel-label {
+  font-family: "Geist", sans-serif;
+  font-size: 13px;
+  letter-spacing: 0.143px;
+  color: var(--graphite);
+  font-weight: 400;
+}
+.channel-row .channel-index {
   font-family: "JetBrains Mono", monospace;
-  font-size: 10.5px;
-  letter-spacing: 0.18em;
+  font-size: 10px;
+  letter-spacing: 0.22em;
   text-transform: uppercase;
-  color: var(--linen);
+  color: var(--ash);
 }
 @media (max-width: 768px) {
   .channel-row {
     grid-template-columns: 1fr 1fr;
   }
-  .channel-row > li:nth-child(2)::before,
-  .channel-row > li:nth-child(4)::before {
-    display: block;
-  }
   .channel-row > li:nth-child(3) {
-    border-top: 1px solid rgba(250, 250, 248, .08);
+    border-top: 1px solid var(--fog);
   }
   .channel-row > li:nth-child(4) {
-    border-top: 1px solid rgba(250, 250, 248, .08);
+    border-top: 1px solid var(--fog);
   }
 }
 
-/* --- Day-by-day cells: cinematic spacing + micro-interactions ------------ */
+/* --- Day-by-day cells: cinematic whitespace per OpenAI reference --------- */
 
 .day-cell {
   position: relative;
-  background: var(--ink);
-  padding: 40px 32px 36px;
+  background: var(--canvas);
+  padding: 56px 32px 48px;
   display: flex;
   flex-direction: column;
-  gap: 16px;
-  min-height: 320px;
-  transition: background 600ms cubic-bezier(0.32, 0.72, 0, 1);
-  overflow: hidden;
-}
-.day-cell::before {
-  content: "";
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  height: 1px;
-  background: linear-gradient(90deg, transparent, var(--carmine), transparent);
-  transform: scaleX(0);
-  transform-origin: left;
-  transition: transform 700ms cubic-bezier(0.32, 0.72, 0, 1);
+  gap: 20px;
+  min-height: 360px;
+  transition: background 480ms cubic-bezier(0.32, 0.72, 0, 1);
 }
 .day-cell:hover {
-  background: var(--ink-2);
-}
-.day-cell:hover::before {
-  transform: scaleX(1);
+  background: var(--milk);
 }
 .day-cell .day-num {
   font-family: Fraunces, serif;
-  font-weight: 900;
-  font-size: 76px;
-  line-height: 0.9;
-  letter-spacing: -0.02em;
-  color: var(--carmine);
-  transition: transform 700ms cubic-bezier(0.32, 0.72, 0, 1),
-              letter-spacing 700ms cubic-bezier(0.32, 0.72, 0, 1);
+  font-weight: 600;
+  font-size: 96px;
+  line-height: 0.95;
+  letter-spacing: -0.03em;
+  color: var(--void);
+  margin-bottom: 4px;
 }
-.day-cell:hover .day-num {
-  transform: translateY(-2px);
-  letter-spacing: -0.025em;
+.day-cell .day-num-accent {
+  color: var(--carmine);
 }
 .day-cell .day-label {
-  font-family: "JetBrains Mono", monospace;
-  font-size: 10.5px;
-  letter-spacing: 0.22em;
-  text-transform: uppercase;
-  color: var(--linen);
+  font-family: "Geist", sans-serif;
+  font-size: 13px;
+  letter-spacing: 0.143px;
+  color: var(--graphite);
+  font-weight: 500;
 }
 .day-cell .day-title {
   font-family: Fraunces, serif;
   font-weight: 500;
   font-size: 24px;
-  line-height: 1.05;
+  line-height: 1.16;
   letter-spacing: -0.012em;
-  color: var(--bone);
+  color: var(--void);
 }
 .day-cell .day-body {
-  font-size: 14.5px;
-  color: var(--bone-dim);
+  font-family: "Geist", sans-serif;
+  font-size: 15px;
+  color: var(--graphite);
   line-height: 1.55;
-  max-width: 30ch;
+  max-width: 32ch;
 }
 
 @media (max-width: 1024px) {
-  .day-cell { min-height: 280px; padding: 32px 24px 28px; }
-  .day-cell .day-num { font-size: 64px; }
+  .day-cell { min-height: 300px; padding: 40px 24px 32px; }
+  .day-cell .day-num { font-size: 72px; }
 }
 
-/* --- Tier card: haptic depth, low-opacity surface tonality --------------- */
+/* --- Tier card: 6.08px radius, hairline, no shadow ----------------------- */
 
 .tier {
   position: relative;
-  background: var(--ink-2);
-  border: 1px solid rgba(250, 250, 248, .07);
-  padding: 32px 28px 28px;
+  background: var(--canvas);
+  border: 1px solid var(--fog);
+  border-radius: 6.08px;
+  padding: 32px 28px;
   display: flex;
   flex-direction: column;
   gap: 16px;
-  box-shadow: 0 1px 0 0 rgba(250, 250, 248, .04) inset, 0 30px 60px -32px rgba(0, 0, 0, .55);
-  transition: transform 600ms cubic-bezier(0.32, 0.72, 0, 1),
-              border-color 600ms cubic-bezier(0.32, 0.72, 0, 1),
-              background 600ms cubic-bezier(0.32, 0.72, 0, 1),
-              box-shadow 600ms cubic-bezier(0.32, 0.72, 0, 1);
+  transition: border-color 320ms cubic-bezier(0.32, 0.72, 0, 1),
+              transform 320ms cubic-bezier(0.32, 0.72, 0, 1);
 }
-.tier::before {
-  /* Subtle inner highlight for haptic depth — top edge of the card */
+.tier:hover {
+  border-color: rgba(0, 0, 0, .25);
+}
+/* Featured tier — the only place where carmine touches a surface, and only
+   as a thin top rule rather than a fill. */
+.tier.featured {
+  border-color: rgba(0, 0, 0, .25);
+}
+.tier.featured::before {
   content: "";
   position: absolute;
   top: 0;
-  left: 8%;
-  right: 8%;
-  height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(250, 250, 248, .14), transparent);
-  pointer-events: none;
-}
-.tier:hover {
-  background: var(--ink-3);
-  border-color: rgba(250, 250, 248, .12);
-  transform: translateY(-3px);
-  box-shadow: 0 1px 0 0 rgba(250, 250, 248, .07) inset, 0 40px 80px -30px rgba(0, 0, 0, .65);
-}
-.tier.featured {
-  background: linear-gradient(180deg, rgba(212, 93, 107, .07) 0%, var(--ink-2) 60%);
-  border-color: rgba(212, 93, 107, .35);
-  box-shadow: 0 1px 0 0 rgba(212, 93, 107, .12) inset, 0 30px 60px -30px rgba(212, 93, 107, .25), 0 30px 60px -32px rgba(0, 0, 0, .55);
-}
-.tier.featured:hover {
-  border-color: rgba(212, 93, 107, .55);
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: var(--carmine);
+  border-radius: 6.08px 6.08px 0 0;
 }
 .tier .tier-name {
   font-family: Fraunces, serif;
   font-weight: 600;
   font-size: 28px;
-  line-height: 1.05;
+  line-height: 1.21;
   letter-spacing: -0.012em;
-  color: var(--bone);
+  color: var(--void);
 }
 .tier .tier-price {
   font-family: Fraunces, serif;
-  font-weight: 900;
-  font-size: 44px;
-  line-height: 1;
-  letter-spacing: -0.022em;
-  color: var(--bone);
+  font-weight: 600;
+  font-size: 48px;
+  line-height: 1.16;
+  letter-spacing: -1.44px;
+  color: var(--void);
 }
 .tier .tier-mo {
   font-family: "Geist", sans-serif;
   font-weight: 400;
-  font-size: 16px;
-  color: var(--bone-dim);
+  font-size: 15px;
+  color: var(--graphite);
 }
 .tier ul.tier-features {
   list-style: none;
@@ -421,21 +408,21 @@ body {
   flex-direction: column;
 }
 .tier ul.tier-features li {
+  font-family: "Geist", sans-serif;
   font-size: 14px;
-  color: var(--bone-dim);
-  padding: 11px 0;
-  border-top: 1px solid rgba(250, 250, 248, .06);
-  line-height: 1.5;
+  color: var(--graphite);
+  padding: 12px 0;
+  border-top: 1px solid var(--fog);
+  line-height: 1.55;
 }
 .tier ul.tier-features li:first-child { border-top: 0; }
 
 /* FAQ details */
 details.faq {
-  border-top: 1px solid rgba(250, 250, 248, .08);
+  border-top: 1px solid var(--fog);
   padding: 24px 0;
-  transition: padding 320ms cubic-bezier(0.32, 0.72, 0, 1);
 }
-details.faq:last-child { border-bottom: 1px solid rgba(250, 250, 248, .08); }
+details.faq:last-child { border-bottom: 1px solid var(--fog); }
 details.faq summary {
   list-style: none;
   cursor: pointer;
@@ -446,59 +433,35 @@ details.faq summary {
   font-family: Fraunces, serif;
   font-weight: 500;
   font-size: 22px;
+  line-height: 1.26;
   letter-spacing: -0.012em;
-  color: var(--bone);
-  transition: color 320ms cubic-bezier(0.32, 0.72, 0, 1);
+  color: var(--void);
+  transition: color 280ms cubic-bezier(0.32, 0.72, 0, 1);
 }
-details.faq summary:hover { color: var(--carmine); }
+details.faq summary:hover { color: var(--graphite); }
 details.faq summary::-webkit-details-marker { display: none; }
 details.faq summary::after {
   content: "+";
   font-family: "JetBrains Mono", monospace;
-  font-size: 20px;
-  color: var(--carmine);
-  transition: transform 320ms cubic-bezier(0.32, 0.72, 0, 1);
+  font-size: 22px;
+  color: var(--graphite);
+  transition: transform 280ms cubic-bezier(0.32, 0.72, 0, 1);
 }
 details.faq[open] summary::after { content: "−"; }
 details.faq p {
   margin-top: 14px;
   font-size: 16px;
-  color: var(--bone-dim);
+  color: var(--graphite);
   max-width: 64ch;
   line-height: 1.65;
-}
-
-/* Subtle paper grain on hero — extremely faint on the dark canvas. */
-.grain {
-  position: relative;
-  isolation: isolate;
-}
-.grain::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='1' stitchTiles='stitch'/></filter><rect width='160' height='160' filter='url(%23n)' opacity='0.06'/></svg>");
-  z-index: -1;
-  mix-blend-mode: overlay;
-}
-
-/* Ambient orbs — used sparingly behind the hero for cinematic depth.
-   Pure transform/opacity for GPU safety; pointer-events disabled. */
-.ambient-orb {
-  position: absolute;
-  border-radius: 50%;
-  pointer-events: none;
-  filter: blur(80px);
-  opacity: 0.18;
 }
 
 /* Scroll-entry baseline — used by client-side IntersectionObserver. */
 .reveal {
   opacity: 0;
-  transform: translateY(24px);
-  transition: opacity 800ms cubic-bezier(0.32, 0.72, 0, 1),
-              transform 800ms cubic-bezier(0.32, 0.72, 0, 1);
+  transform: translateY(16px);
+  transition: opacity 600ms cubic-bezier(0.32, 0.72, 0, 1),
+              transform 600ms cubic-bezier(0.32, 0.72, 0, 1);
   will-change: transform, opacity;
 }
 .reveal.is-visible {
@@ -507,4 +470,23 @@ details.faq p {
 }
 @media (prefers-reduced-motion: reduce) {
   .reveal { opacity: 1; transform: none; transition: none; }
+}
+
+/* Soft chip — OpenAI's category-mode buttons. 40px radius, chalk surface. */
+.soft-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(0, 0, 0, .04);
+  color: var(--void);
+  font-family: "Geist", sans-serif;
+  font-weight: 500;
+  font-size: 14px;
+  padding: 8px 16px;
+  border-radius: 40px;
+  text-decoration: none;
+  transition: background 240ms cubic-bezier(0.32, 0.72, 0, 1);
+}
+.soft-chip:hover {
+  background: var(--chalk);
 }
