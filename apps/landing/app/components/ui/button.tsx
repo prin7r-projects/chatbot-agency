@@ -1,14 +1,14 @@
 "use client";
 
 /**
- * [DISPATCH_BUTTON] Round-2 redesign 2026-05-08 — OpenAI reference applied.
+ * [RELAYHOUSE_BUTTON] Round-2 redesign 2026-05-08 — OpenAI reference applied.
  *
  * Pill buttons (9999px radius) per the OpenAI design reference. Filled
  * variant: black fill, white text, near-invisible shadow. Ghost variant:
  * transparent with hairline border, hover surface = chalk.
  *
  * The source is owned by this repo per the Prin7r ShadCN-first baseline
- * (DESIGN.md §3). Re-themed against the Dispatch round-2 tokens.
+ * (DESIGN.md §3). Re-themed against the Relayhouse round-2 tokens.
  */
 
 import * as React from "react";

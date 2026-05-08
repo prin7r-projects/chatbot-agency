@@ -44,7 +44,7 @@ A salon, clinic, school, brokerage, or small e-commerce shop with:
 - **Enterprise procurement-led buyers.** Asking for an SOC2 letter, a 30-day pilot agreement, and a master services agreement before the kickoff call. Refer to Decagon / Sierra / Ada.
 - **Customers in compliance-sensitive verticals.** Healthcare diagnosis, legal advice, financial advice. Excluded by terms of service.
 - **Customers asking for outbound cold messaging on WhatsApp.** Reputational and legal trap. Walk.
-- **Customers expecting human chat coverage 24/7.** That's a BPO, not Dispatch.
+- **Customers expecting human chat coverage 24/7.** That's a BPO, not Relayhouse.
 
 ## Trust signals the audience checks
 

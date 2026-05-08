@@ -1,5 +1,5 @@
 /**
- * [DISPATCH_CN] tiny class merge helper. Used by the vendored shadcn/ui
+ * [RELAYHOUSE_CN] tiny class merge helper. Used by the vendored shadcn/ui
  * primitives so the source matches the upstream signature.
  */
 

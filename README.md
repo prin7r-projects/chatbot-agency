@@ -1,4 +1,4 @@
-# Dispatch — chatbot agency · `chatbot-agency.prin7r.com`
+# Relayhouse — chatbot agency · `chatbot-agency.prin7r.com`
 
 > A productized chatbot agency. Spec on Monday, bot live by Friday. Telegram, Discord, WhatsApp from one knowledge base. One bill.
 
@@ -25,7 +25,7 @@
 
 - A 15-section [`DESIGN.md`](./DESIGN.md) at root.
 - The 10 strategy / design docs under [`docs/`](./docs/) — brand identity, architecture, journeys, pain points, audience, channels, sales, marketing, GTM, pitch deck (with companion `pitch-deck.html`).
-- A hand-coded Next.js 15 landing at [`apps/landing/`](./apps/landing/) with ShadCN-vendored Button + Card primitives re-themed to the Dispatch tokens.
+- A hand-coded Next.js 15 landing at [`apps/landing/`](./apps/landing/) with ShadCN-vendored Button + Card primitives re-themed to the Relayhouse tokens.
 - NOWPayments hosted-invoice route at [`/api/checkout/nowpayments`](./apps/landing/app/api/checkout/nowpayments/route.ts) and HMAC-SHA512 IPN webhook at [`/api/webhooks/nowpayments`](./apps/landing/app/api/webhooks/nowpayments/route.ts).
 - A Dockerfile + docker-compose for deployment to `storage-contabo` behind Traefik with Let's Encrypt.
 - Desktop + mobile production screenshots under [`docs/screenshots/`](./docs/screenshots/).

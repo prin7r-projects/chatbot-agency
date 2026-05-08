@@ -1,11 +1,11 @@
 import type { Config } from "tailwindcss";
 
 /**
- * [DISPATCH_TAILWIND] Round-2 redesign 2026-05-08 — OpenAI reference applied.
+ * [RELAYHOUSE_TAILWIND] Round-2 redesign 2026-05-08 — OpenAI reference applied.
  *
  * Canvas pivots from dark forest to OpenAI's pure white. Neutral palette is
  * achromatic (1% colorfulness) per the OpenAI design reference at
- * /Users/keer/projects/prin7r/design-references/openai.md. The Dispatch
+ * /Users/keer/projects/prin7r/design-references/openai.md. The Relayhouse
  * brand essence (editorial dispatch, schedule-as-promise) is preserved
  * through Fraunces editorial display + a single carmine accent reserved
  * for the few decisive moments. Inter is BANNED — Geist carries body/UI.
@@ -76,7 +76,7 @@ const config: Config = {
       },
       fontSize: {
         // OpenAI scale: 13 / 14 / 16 / 17 / 18 / 22 / 28 / 48 — extended up
-        // for Dispatch's editorial hero so headlines still feel carved.
+        // for Relayhouse's editorial hero so headlines still feel carved.
         caption: ["13px", { lineHeight: "1.64" }],
         heading: ["22px", { lineHeight: "1.26" }],
         "heading-lg": ["28px", { lineHeight: "1.21" }],

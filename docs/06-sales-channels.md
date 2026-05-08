@@ -25,7 +25,7 @@ A blended motion: cold outbound on the channels where the buyer already lives, a
 - Send a 90-word personalized opener: name the salon, name a peak-time pain (overnight DMs / Saturday rush), end with one question (would a 5-day pilot make sense?).
 - Reply rate target 2-5%. Close-to-paid-pilot 0.5-1%. Gross outbound CAC ~$100 including compute + supervision.
 
-**Compliance.** Always opt-in spirit; always identify the dispatcher; one follow-up max; never script a hard sell. WhatsApp outbound is **off** under the Dispatch brand because Meta's policy makes it reputationally risky.
+**Compliance.** Always opt-in spirit; always identify the dispatcher; one follow-up max; never script a hard sell. WhatsApp outbound is **off** under the Relayhouse brand because Meta's policy makes it reputationally risky.
 
 ### 2. Agency partnerships
 

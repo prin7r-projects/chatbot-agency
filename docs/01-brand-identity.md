@@ -1,8 +1,10 @@
 # 01 — Brand identity
 
-> Project: `chatbot-agency` · Brand: **Dispatch**
+> Project: `chatbot-agency` · Brand: **Relayhouse**
 > Service: productized chatbot agency · 5-day SLA · Telegram / Discord / WhatsApp
 > One bill, one knowledge base, three channels.
+
+> **2026-05-08 rebrand.** Original name was **Dispatch**; the wave-2 name-research audit at `/Users/keer/projects/prin7r/wave2-name-research.md` flagged FAIL because Anthropic Claude Dispatch (March 2026) now dominates SERP for "Dispatch + chatbot + Telegram/WhatsApp." Brand swapped to **Relayhouse**. Voice essence (editorial dispatch, schedule-as-promise, the "dispatcher" role) is preserved. Visual tokens follow the OpenAI round-2 redesign documented in `/DESIGN.md` — the *Dispatch Forest* palette section below describes the round-1 forest/cream system that was overwritten before launch; the live tokens are in `apps/landing/tailwind.config.ts` and `globals.css`.
 
 ## Pyramid
 
@@ -15,7 +17,7 @@
 
 ## Positioning statement
 
-For owner-operators at clinics, salons, brokerages, schools, and small e-commerce shops who lose late-night DMs to slow human triage, **Dispatch** is a productized chatbot agency that ships a working bot to Telegram, Discord, and WhatsApp from one knowledge base in **five working days** — unlike ManyChat-class flow builders that hand you a blank canvas, or Botpress / Voiceflow agencies that quote a six-week engagement and a five-figure invoice, because we treat onboarding as the product, the LLM as a tool, and your weekly tuning hour as the subscription.
+For owner-operators at clinics, salons, brokerages, schools, and small e-commerce shops who lose late-night DMs to slow human triage, **Relayhouse** is a productized chatbot agency that ships a working bot to Telegram, Discord, and WhatsApp from one knowledge base in **five working days** — unlike ManyChat-class flow builders that hand you a blank canvas, or Botpress / Voiceflow agencies that quote a six-week engagement and a five-figure invoice, because we treat onboarding as the product, the LLM as a tool, and your weekly tuning hour as the subscription.
 
 ## Audience persona — primary
 
@@ -53,7 +55,9 @@ For owner-operators at clinics, salons, brokerages, schools, and small e-commerc
 
 ## Visual system
 
-### Palette — *Dispatch Forest*
+### Palette — *Dispatch Forest* (round-1 archive — superseded)
+
+> The forest/cream/carmine system below is the round-1 palette and is preserved here for the archive only. Live tokens are the OpenAI achromatic palette in `apps/landing/tailwind.config.ts` (`canvas` / `milk` / `chalk` / `fog` / `ash` / `graphite` / `void` + `carmine` accent). See `/DESIGN.md` §4.
 
 | Role | Token | Hex | Used for |
 |---|---|---|---|
@@ -79,15 +83,15 @@ Source — Google Fonts only (`display=swap`). No web-font tax, no third-party t
 
 ### Logo concept
 
-A square stamp the size of a postage cancellation: forest fill, cream stencilled letterforms `Dt` (the dispatch monogram) plus a 1.5px carmine underbar. The wordmark `dispatch.` runs underneath in JetBrains Mono with a trailing period (the dispatcher's signature). Inline SVG; no external asset.
+A square stamp the size of a postage cancellation: black fill, white stencilled letterforms `Rh` (the Relayhouse monogram — *r* for relay, *h* for house) plus a 1.5px carmine underbar. The wordmark `relayhouse.` runs underneath in Geist with a trailing carmine period (the dispatcher's signature). Inline SVG; no external asset.
 
 ```svg
 <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-  <rect x="0" y="0" width="64" height="64" rx="2" fill="#0F2A26"/>
-  <text x="32" y="40" text-anchor="middle"
-        font-family="Fraunces, serif" font-weight="900" font-size="32"
-        fill="#F4EDE0">Dt</text>
-  <rect x="14" y="50" width="36" height="2" fill="#C24656"/>
+  <rect x="0" y="0" width="64" height="64" rx="6" fill="#000000"/>
+  <text x="32" y="42" text-anchor="middle"
+        font-family="Fraunces, serif" font-weight="700" font-size="32"
+        fill="#FFFFFF">Rh</text>
+  <rect x="14" y="51" width="36" height="1.5" fill="#C24656"/>
 </svg>
 ```
 
@@ -100,7 +104,7 @@ A square stamp the size of a postage cancellation: forest fill, cream stencilled
 
 ## Forbidden
 
-- Reusing palettes from other Wave 2 projects (Cited's scarlet/ochre is theirs; Dispatch's forest/carmine is ours).
+- Reusing palettes from other Wave 2 projects (Cited's scarlet/ochre is theirs; Relayhouse's achromatic-with-carmine is ours).
 - Mimicking Anthropic / OpenAI / Vercel / Linear / ManyChat visual identities.
 - Three-platform-logo-collage hero.
 - Chat-bubble blue. Generic AI-purple. Pastel mint.

@@ -1,4 +1,4 @@
-# apps/app — Dispatch dashboard (deferred)
+# apps/app — Relayhouse dashboard (deferred)
 
 Placeholder for the customer-facing dashboard. Will be forked from
 [`wasp-lang/open-saas`](https://github.com/wasp-lang/open-saas) in a later wave.

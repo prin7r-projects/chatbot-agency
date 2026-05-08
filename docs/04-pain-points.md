@@ -10,7 +10,7 @@ Root-cause analysis of why the alternatives fail the SMB owner-operator.
 
 **Why competitors don't fix it.** Their unit economics depend on self-serve at $15-99/mo. Adding done-for-you services breaks the SaaS gross margin and turns them into agencies they don't want to be. ManyChat's "Partners" directory is the official admission: ManyChat itself won't deliver the bot.
 
-**Dispatch's response.** The product *is* the delivery. The customer never sees a builder; they see a knowledge base and a weekly call.
+**Relayhouse's response.** The product *is* the delivery. The customer never sees a builder; they see a knowledge base and a weekly call.
 
 ---
 
@@ -22,7 +22,7 @@ Root-cause analysis of why the alternatives fail the SMB owner-operator.
 
 **Why competitors don't fix it.** Routing intelligence is a real engineering investment, and they all benchmark against GPT-4. They didn't build the LLM router because their target buyer can afford GPT-4.
 
-**Dispatch's response.** GLM 5.1 Flash for >80% of replies, Claude 4.5 Haiku for the long tail, Whisper for voice notes. COGS per customer ≈ $66-70/mo at Growth tier. Starter tier stays gross-margin positive in cheap currencies.
+**Relayhouse's response.** GLM 5.1 Flash for >80% of replies, Claude 4.5 Haiku for the long tail, Whisper for voice notes. COGS per customer ≈ $66-70/mo at Growth tier. Starter tier stays gross-margin positive in cheap currencies.
 
 ---
 
@@ -34,7 +34,7 @@ Root-cause analysis of why the alternatives fail the SMB owner-operator.
 
 **Why competitors don't fix it.** Multi-channel is harder to build and harder to sell — "but I only need WhatsApp." So the cheaper agencies stay single-channel and die in waves.
 
-**Dispatch's response.** Every contract includes Telegram fallback. Pro tier is three channels + web widget. The pitch deliberately leads with three channels, one knowledge base, one bill — channel count is the headline.
+**Relayhouse's response.** Every contract includes Telegram fallback. Pro tier is three channels + web widget. The pitch deliberately leads with three channels, one knowledge base, one bill — channel count is the headline.
 
 ---
 
@@ -46,7 +46,7 @@ Root-cause analysis of why the alternatives fail the SMB owner-operator.
 
 **Why competitors don't fix it.** A Decagon-grade engineer hour costs $200+. They can't cross-subsidize SMB without diluting the brand and the team.
 
-**Dispatch's response.** Productize the white-glove. The same kickoff doc, weekly call, and monthly accuracy report Decagon delivers — but in 5 days, at $299-1,200 setup, with the LLM router instead of a senior engineer per tenant.
+**Relayhouse's response.** Productize the white-glove. The same kickoff doc, weekly call, and monthly accuracy report Decagon delivers — but in 5 days, at $299-1,200 setup, with the LLM router instead of a senior engineer per tenant.
 
 ---
 
@@ -58,7 +58,7 @@ Root-cause analysis of why the alternatives fail the SMB owner-operator.
 
 **Why competitors don't fix it.** Maintenance is service work. SaaS doesn't book service work as recurring revenue cleanly.
 
-**Dispatch's response.** The subscription explicitly includes 1/3/8 tuning hours per month with a calendar invite. KB freshness is a tracked metric; the monthly accuracy report shows it. After 30 days un-edited, the bot prefixes its answers with "last updated …" — making staleness visible to the *customer's* customer.
+**Relayhouse's response.** The subscription explicitly includes 1/3/8 tuning hours per month with a calendar invite. KB freshness is a tracked metric; the monthly accuracy report shows it. After 30 days un-edited, the bot prefixes its answers with "last updated …" — making staleness visible to the *customer's* customer.
 
 ---
 
@@ -70,7 +70,7 @@ Root-cause analysis of why the alternatives fail the SMB owner-operator.
 
 **Why competitors don't fix it.** Marketing teams optimize for sign-ups, not for paid LTV.
 
-**Dispatch's response.** Setup fee is non-negotiable: $299 / $599 / $1,200. Annual prepay (2 months free) is the only discount. Setup fee covers the first month's CAC and acts as the qualifying filter.
+**Relayhouse's response.** Setup fee is non-negotiable: $299 / $599 / $1,200. Annual prepay (2 months free) is the only discount. Setup fee covers the first month's CAC and acts as the qualifying filter.
 
 ---
 
@@ -82,4 +82,4 @@ Root-cause analysis of why the alternatives fail the SMB owner-operator.
 
 **Why competitors don't fix it.** It works against a designer's compensation scheme to ship a non-default-tasteful site.
 
-**Dispatch's response.** Editorial dispatch aesthetic — forest green + cream + carmine, serif display, square-edged everything, day-numerals as the visual anchor. The brand reads as a *studio*, not as a SaaS. See [`docs/01-brand-identity.md`](01-brand-identity.md).
+**Relayhouse's response.** Editorial dispatch aesthetic — pure white canvas, achromatic neutrals, carmine accent on four decisive moments only, Fraunces display, day-numerals as the visual anchor. The brand reads as a *studio*, not as a SaaS. See [`docs/01-brand-identity.md`](01-brand-identity.md) and [`/DESIGN.md`](../DESIGN.md).

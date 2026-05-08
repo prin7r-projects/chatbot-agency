@@ -1,9 +1,9 @@
 /**
- * [DISPATCH_CARD] Round-2 redesign 2026-05-08 — OpenAI reference applied.
+ * [RELAYHOUSE_CARD] Round-2 redesign 2026-05-08 — OpenAI reference applied.
  *
  * 6.08px border-radius (OpenAI's signature near-square radius), white
  * surface, fog-border hairline, no shadow. Vendored from shadcn/ui and
- * re-themed against the Dispatch round-2 tokens. The repo owns this source
+ * re-themed against the Relayhouse round-2 tokens. The repo owns this source
  * per the Prin7r ShadCN-first baseline (DESIGN.md §3).
  */
 

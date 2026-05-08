@@ -3,8 +3,8 @@ services:
     build:
       context: .
       dockerfile: Dockerfile.landing
-    image: dispatch-landing:latest
-    container_name: dispatch-landing
+    image: relayhouse-landing:latest
+    container_name: relayhouse-landing
     restart: unless-stopped
     expose:
       - "3000"

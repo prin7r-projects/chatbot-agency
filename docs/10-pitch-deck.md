@@ -6,7 +6,7 @@
 
 ## 1. Title
 
-**Dispatch.**
+**Relayhouse.**
 A productized chatbot agency.
 Spec on Monday. Bot live by Friday.
 One knowledge base, three channels, one bill.

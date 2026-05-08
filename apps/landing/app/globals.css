@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 /* ---------------------------------------------------------------------------
-   [DISPATCH_GLOBALS] Round-2 redesign 2026-05-08 — OpenAI reference applied.
+   [RELAYHOUSE_GLOBALS] Round-2 redesign 2026-05-08 — OpenAI reference applied.
 
    Canvas: pure white (#FFFFFF). Achromatic palette — color is reserved for
    editorial moments, never UI. Two radii: 9999px pills + 6.08px cards.
@@ -163,14 +163,14 @@ body {
 }
 
 /* Soft-edge content frame — 6.08px radius, fog-border hairline, no shadow. */
-.dispatch-frame {
+.house-frame {
   background: var(--canvas);
   border: 1px solid var(--fog);
   border-radius: 6.08px;
   position: relative;
   transition: border-color 320ms cubic-bezier(0.32, 0.72, 0, 1);
 }
-.dispatch-frame:hover {
+.house-frame:hover {
   border-color: rgba(0, 0, 0, .25);
 }
 
@@ -207,7 +207,7 @@ body {
 
 @media (prefers-reduced-motion: reduce) {
   .pulse-dot { animation: none; opacity: 1; }
-  .day-cell, .dispatch-frame, .tier { transition: none !important; }
+  .day-cell, .house-frame, .tier { transition: none !important; }
 }
 
 .monoglyph {

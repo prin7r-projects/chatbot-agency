@@ -13,7 +13,7 @@ flowchart LR
     WW[Web widget]
   end
 
-  subgraph Edge["Dispatch edge"]
+  subgraph Edge["Relayhouse edge"]
     direction TB
     Router[LLM router<br/>GLM 5.1 Flash &rarr; Claude 4.5 Haiku fallback]
     KB[Knowledge base<br/>Postgres + pgvector]
@@ -21,7 +21,7 @@ flowchart LR
     Handoff[Owner handoff<br/>Telegram pings]
   end
 
-  subgraph Studio["Dispatch studio"]
+  subgraph Studio["Relayhouse studio"]
     direction TB
     Landing[apps/landing<br/>Next.js 15 + ShadCN]
     Dashboard[apps/app<br/>open-saas fork — deferred]

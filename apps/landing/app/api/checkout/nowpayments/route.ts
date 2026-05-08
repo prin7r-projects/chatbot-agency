@@ -1,5 +1,5 @@
 /**
- * [DISPATCH_NOWPAYMENTS_CHECKOUT] POST /api/checkout/nowpayments
+ * [RELAYHOUSE_NOWPAYMENTS_CHECKOUT] POST /api/checkout/nowpayments
  *
  * Body:    { plan: "starter" | "growth" | "pro" }
  * Returns: { invoice_url: string, invoice_id: string, plan: string, mode: "live" }

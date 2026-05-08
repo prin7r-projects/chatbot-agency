@@ -3,7 +3,7 @@ import { ButtonAnchor } from "@/app/components/ui/button";
 import { PricingCta } from "@/app/pricing-cta";
 
 /**
- * [DISPATCH_LANDING] Round-2 redesign 2026-05-08 — OpenAI reference applied.
+ * [RELAYHOUSE_LANDING] Round-2 redesign 2026-05-08 — OpenAI reference applied.
  *
  * Sections:
  *   #masthead → #hero → #proof → #days → #service → #pricing
@@ -67,7 +67,7 @@ function Masthead() {
 
 function Logo() {
   return (
-    <a href="#hero" className="flex items-center gap-3 group" aria-label="Dispatch — home">
+    <a href="#hero" className="flex items-center gap-3 group" aria-label="Relayhouse — home">
       <span aria-hidden="true" className="inline-block">
         <svg width="28" height="28" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
           <rect x="0" y="0" width="64" height="64" rx="6" fill="#000000" />
@@ -75,12 +75,12 @@ function Logo() {
             x="32" y="42" textAnchor="middle"
             fontFamily="Fraunces, Georgia, serif"
             fontWeight="700" fontSize="32" fill="#FFFFFF"
-          >Dt</text>
+          >Rh</text>
           <rect x="14" y="51" width="36" height="1.5" fill="#C24656" />
         </svg>
       </span>
       <span className="font-sans text-[14px] font-medium tracking-tight text-void">
-        dispatch<span className="text-carmine">.</span>
+        relayhouse<span className="text-carmine">.</span>
       </span>
     </a>
   );
@@ -287,7 +287,7 @@ function ServiceBlock() {
         />
         <div className="mt-20 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
           {items.map((item) => (
-            <div key={item.kicker} className="dispatch-frame p-8 lg:p-10 flex flex-col gap-4 bg-canvas">
+            <div key={item.kicker} className="house-frame p-8 lg:p-10 flex flex-col gap-4 bg-canvas">
               <p className="kicker">{item.kicker}</p>
               <h3 className="font-display font-semibold text-[22px] tracking-tight leading-[1.21] text-void">
                 {item.title}
@@ -418,7 +418,7 @@ function Pricing() {
           If you don&rsquo;t see a 30% drop in unanswered messages in month one, we refund the setup fee.
         </p>
 
-        <div className="mt-16 dispatch-frame p-8 lg:p-10 max-w-2xl">
+        <div className="mt-16 house-frame p-8 lg:p-10 max-w-2xl">
           <p className="kicker">Resellers · white label</p>
           <h3 className="mt-3 font-display font-semibold text-[22px] tracking-tight text-void leading-[1.21]">
             Web studios &amp; marketing shops — 40% margin.
@@ -538,7 +538,7 @@ function Footer() {
         <div className="md:col-span-6 flex flex-col gap-5">
           <Logo />
           <p className="max-w-md text-[14px] text-graphite leading-[1.65]">
-            Dispatch is a productized chatbot agency. Spec on Monday, bot live by Friday. One
+            Relayhouse is a productized chatbot agency. Spec on Monday, bot live by Friday. One
             knowledge base, three channels, one bill. Built in 2026 by the prin7r-projects
             studio.
           </p>

@@ -2,7 +2,7 @@
 
 ## Positioning (one paragraph)
 
-**Dispatch is a chatbot agency that ships a working bot to Telegram, Discord, and WhatsApp from one knowledge base in five working days.** We are a service productized as a subscription. We are not a builder. We are not an AI platform. We are a small studio that meets you on Monday, ships your bot by Friday, and runs the weekly tuning call on Tuesdays. One bill, three channels, one knowledge base.
+**Relayhouse is a chatbot agency that ships a working bot to Telegram, Discord, and WhatsApp from one knowledge base in five working days.** We are a service productized as a subscription. We are not a builder. We are not an AI platform. We are a small studio that meets you on Monday, ships your bot by Friday, and runs the weekly tuning call on Tuesdays. One bill, three channels, one knowledge base.
 
 ## Positioning canvas
 
@@ -10,7 +10,7 @@
 |---|---|
 | **For** | Owner-operators of clinics, salons, brokerages, schools, and small e-commerce shops with ≥30 inbound DMs/day. |
 | **Who** | Lose 20-40% of late-night DMs to slow human triage. |
-| **Dispatch is** | A productized chatbot agency. |
+| **Relayhouse is** | A productized chatbot agency. |
 | **That** | Ships a multilingual bot to Telegram, Discord, and WhatsApp in 5 working days, then keeps it tuned weekly. |
 | **Unlike** | ManyChat-class flow builders (you build it), or Decagon / Sierra (six-week enterprise sales cycles). |
 | **Because** | We treat onboarding as the product, the LLM as a tool, and the weekly tuning hour as the subscription. |

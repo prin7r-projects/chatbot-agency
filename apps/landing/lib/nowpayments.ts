@@ -1,5 +1,5 @@
 /**
- * [DISPATCH_NOWPAYMENTS] Server-side helpers for the NOWPayments hosted invoice.
+ * [RELAYHOUSE_NOWPAYMENTS] Server-side helpers for the NOWPayments hosted invoice.
  *
  * - `PLANS` maps the three pricing tiers visible on the landing to their
  *   USD price + checkout copy. The setup-fee charge is what the customer
@@ -28,7 +28,7 @@ export type Plan = {
 export const PLANS: Record<PlanId, Plan> = {
   starter: {
     id: "starter",
-    name: "Dispatch — Starter setup",
+    name: "Relayhouse — Starter setup",
     setupUsd: 299,
     monthlyUsd: 79,
     description:
@@ -36,7 +36,7 @@ export const PLANS: Record<PlanId, Plan> = {
   },
   growth: {
     id: "growth",
-    name: "Dispatch — Growth setup",
+    name: "Relayhouse — Growth setup",
     setupUsd: 599,
     monthlyUsd: 199,
     description:
@@ -44,7 +44,7 @@ export const PLANS: Record<PlanId, Plan> = {
   },
   pro: {
     id: "pro",
-    name: "Dispatch — Pro setup",
+    name: "Relayhouse — Pro setup",
     setupUsd: 1200,
     monthlyUsd: 449,
     description:
@@ -78,7 +78,7 @@ export async function createNowpaymentsInvoice(input: CreateInvoiceInput): Promi
   const sandbox = (optionalEnv("NOWPAYMENTS_SANDBOX") ?? "false").toLowerCase() === "true";
   const apiBase = sandbox ? "https://api-sandbox.nowpayments.io" : "https://api.nowpayments.io";
 
-  const orderId = `dispatch_${input.plan.id}_${Date.now()}_${Math.random().toString(36).slice(2, 8)}`;
+  const orderId = `relayhouse_${input.plan.id}_${Date.now()}_${Math.random().toString(36).slice(2, 8)}`;
 
   const body = {
     price_amount: input.plan.setupUsd,
