@@ -14,8 +14,8 @@ import type { NewMessage, NewOwnerHandoff, NewConversation } from "app/db/drizzl
 
 const EMBEDDING_MODEL = "text-embedding-3-small";
 
-const GLM_BASE_URL = "https://api.z.ai/v1";
-const GLM_MODEL = "glm-4-flash"; // GLM 5.1 Flash via Z.ai
+const GLM_BASE_URL = "https://open.bigmodel.cn/api/paas/v4";
+const GLM_MODEL = "glm-5.1"; // GLM 5.1 via ZhipuAI (BigModel)
 
 const ANTHROPIC_BASE_URL = "https://api.anthropic.com/v1/messages";
 const ANTHROPIC_MODEL = "claude-3-5-haiku-20241022"; // Haiku 4.5 closest
@@ -151,7 +151,7 @@ ${context}`;
       max_tokens: 1024,
     });
     replyText = glmResponse.choices[0]?.message?.content ?? "";
-    llmProvider = "glm-4-flash";
+    llmProvider = "glm-5.1";
   } catch (err) {
     console.warn("[llm-router] GLM failed, falling back to Haiku:", err instanceof Error ? err.message : err);
     try {
