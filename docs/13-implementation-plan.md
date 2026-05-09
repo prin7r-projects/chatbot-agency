@@ -56,6 +56,10 @@
 
 **Goal.** A single tenant can ingest a KB and the LLM router replies on Telegram with citation back to KB chunks.
 
+**ORM split (Prisma + Drizzle).** Wasp generates from `apps/app/schema.prisma`, so Wasp-managed models (User, Auth, Wasp's payment glue — anything Wasp itself writes) stay in **Prisma**. The doc 12 §2.2 domain tables (`customers`, `contracts`, `channels`, `knowledge_bases`, `kb_chunks` w/ pgvector, `conversations`, `messages`, `owner_handoffs`, `tuning_sessions`, `referrals`) use **Drizzle**. Both share the same Postgres 16 + pgvector DB. Drizzle migrations live under `apps/app/db/drizzle/migrations/`. Prisma migrations stay where Wasp puts them. Wasp `User` ↔ domain `customers` are **separate tables**, joined by email (or by `customers.id` stored as a column on `User`). If dual-ORM plumbing for any single model exceeds 2h, comment on this issue with the specific friction before continuing — do NOT silently rip out Prisma.
+
+**E2E test obligation.** Tests live under `apps/app/e2e/` (Playwright preferred). Write at least one E2E test per main scenario in doc 11 that exercises the **KB-ingest → Telegram-reply** flow end-to-end. The smoke transcript required by DoD becomes the basis for an automated test. Each Phase 1 API contract from doc 12 (KB ingest endpoint, message/router endpoint, Telegram webhook) gets at least one E2E assertion. Tests target `http://localhost:3000` (or wherever Wasp serves); wire them to a `BASE_URL` env var so Phase 4 can flip them to the live deploy URL. Do NOT block Phase 1 on the live URL existing.
+
 **Tasks.**
 1. Drizzle schema per doc 12 §2.
 2. KB ingester: input `{ kind, value }` → fetch (Notion API / web crawl / PDF parse) → chunk (RecursiveCharacterTextSplitter ~500 tokens) → embed via `text-embedding-3-small` → store in `kb_chunks`. Idempotent on `(kbId, hash)`.
@@ -70,8 +74,9 @@
 - [ ] Router replies with confidence < 1 on edge questions and triggers `ownerHandoff`.
 - [ ] Telegram connector receives + responds within 2s p95.
 - [ ] All KB cite via `ragSourceIds` on the message.
+- [ ] E2E tests pass against localhost: KB ingest → embed → Telegram webhook → router reply → confidence badge; one test per doc 11 main scenario that exercises the full pipeline; one assertion per Phase 1 API contract from doc 12.
 
-**Hand-off context.** Don't fine-tune. Prompt + RAG only. Confidence is the union of (chunk score, LLM self-eval). Keep it explainable.
+**Hand-off context.** Don't fine-tune. Prompt + RAG only. Confidence is the union of (chunk score, LLM self-eval). Keep it explainable. E2E tests are Playwright under `apps/app/e2e/` targeting `BASE_URL` env (defaults to localhost, flips to live URL in Phase 4). Do not delete or skip them — they gate the Phase 4 deploy.
 
 ---
 

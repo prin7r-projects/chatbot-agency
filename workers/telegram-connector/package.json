@@ -1,5 +1,5 @@
 {
-  "name": "llm-router",
+  "name": "telegram-connector",
   "version": "0.1.0",
   "private": true,
   "type": "module",
@@ -8,8 +8,9 @@
   },
   "dependencies": {
     "app": "workspace:*",
+    "llm-router": "workspace:*",
     "drizzle-orm": "^0.45.2",
-    "openai": "^6.37.0",
+    "openai": "^6.27.0",
     "postgres": "^3.4.9"
   },
   "devDependencies": {
