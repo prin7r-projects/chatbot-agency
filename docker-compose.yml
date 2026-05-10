@@ -19,6 +19,36 @@ services:
     networks:
       - relayhouse
 
+  app:
+    build:
+      context: .
+      dockerfile: apps/app/Dockerfile.app
+    image: relayhouse-app:latest
+    container_name: relayhouse-app
+    restart: unless-stopped
+    expose:
+      - "3001"
+    env_file:
+      - .env
+    environment:
+      DATABASE_URL: postgresql://relayhouse:${POSTGRES_PASSWORD:-relayhouse_dev}@postgres:5432/relayhouse
+      WASP_WEB_CLIENT_URL: https://relayhouse.prin7r-app.com
+      WASP_SERVER_URL: https://relayhouse.prin7r-app.com
+      PORT: "3001"
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.relayhouse-app.rule=Host(`relayhouse.prin7r-app.com`)"
+      - "traefik.http.routers.relayhouse-app.entrypoints=websecure"
+      - "traefik.http.routers.relayhouse-app.tls.certresolver=letsencrypt"
+      - "traefik.http.services.relayhouse-app.loadbalancer.server.port=3001"
+    networks:
+      - relayhouse
+
   postgres:
     image: pgvector/pgvector:pg16
     container_name: relayhouse-postgres
