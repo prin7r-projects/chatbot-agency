@@ -28,6 +28,58 @@ export interface PollResult {
   escalated: number;
 }
 
+export type HandoffAction = "skip" | "re_ping" | "escalate";
+
+export interface HandoffSnapshot {
+  id: string;
+  pingedAt: Date | null;
+}
+
+export interface ClassifyInput {
+  handoff: HandoffSnapshot;
+  rePingThreshold: Date;
+  escalateThreshold: Date;
+  now: Date;
+}
+
+export interface ClassifyOutput {
+  action: HandoffAction;
+  reason: string;
+}
+
+// ---- Decision logic (testable without DB) ----------------------------------
+
+/**
+ * Classify what action to take for a single unresolved handoff.
+ *
+ * Mutates `rePinged` and `escalated` state maps as a side effect,
+ * mirroring the in-memory tracking that poll() maintains.
+ */
+export function classifyHandoff(
+  input: ClassifyInput,
+  rePinged: Map<string, Date>,
+  escalated: Set<string>,
+): ClassifyOutput {
+  const { handoff, rePingThreshold, escalateThreshold, now } = input;
+
+  if (!handoff.pingedAt) {
+    return { action: "skip", reason: "not yet pinged" };
+  }
+
+  if (handoff.pingedAt < escalateThreshold && !escalated.has(handoff.id)) {
+    escalated.add(handoff.id);
+    return { action: "escalate", reason: `pinged at ${handoff.pingedAt.toISOString()} exceeds escalation threshold` };
+  }
+
+  const lastPing = rePinged.get(handoff.id) ?? handoff.pingedAt;
+  if (lastPing < rePingThreshold && !escalated.has(handoff.id)) {
+    rePinged.set(handoff.id, now);
+    return { action: "re_ping", reason: `last ping ${lastPing.toISOString()} exceeds re-ping threshold` };
+  }
+
+  return { action: "skip", reason: "within thresholds or already handled" };
+}
+
 // ---- Core logic -------------------------------------------------------------
 
 export async function poll(): Promise<PollResult> {
@@ -44,21 +96,16 @@ export async function poll(): Promise<PollResult> {
   let escalatedCount = 0;
 
   for (const handoff of unresolved) {
-    const pingedAt = handoff.pingedAt;
-    if (!pingedAt) continue;
+    const result = classifyHandoff(
+      { handoff: { id: handoff.id, pingedAt: handoff.pingedAt }, rePingThreshold, escalateThreshold, now },
+      rePinged,
+      escalated,
+    );
 
-    // Escalate: original ping was > 1 hour ago and not already escalated
-    if (pingedAt < escalateThreshold && !escalated.has(handoff.id)) {
-      escalated.add(handoff.id);
+    if (result.action === "escalate") {
       await sendEscalationPing(handoff);
       escalatedCount++;
-      continue;
-    }
-
-    // Re-ping: last ping/reping was > 15 min ago and not escalated
-    const lastPing = rePinged.get(handoff.id) ?? pingedAt;
-    if (lastPing < rePingThreshold && !escalated.has(handoff.id)) {
-      rePinged.set(handoff.id, now);
+    } else if (result.action === "re_ping") {
       await sendRePing(handoff);
       rePingedCount++;
     }
