@@ -216,6 +216,21 @@ api paymentsWebhook {
   middlewareConfigFn: import { paymentsMiddlewareConfigFn } from "@src/payment/webhook",
   httpRoute: (POST, "/payments-webhook")
 }
+
+api relayhouseWidget {
+  fn: import { relayhouseWidget } from "@src/relayhouse/widgetApi",
+  httpRoute: (GET, "/widget/:botId.js")
+}
+
+api relayhouseChat {
+  fn: import { relayhouseChat } from "@src/relayhouse/widgetApi",
+  httpRoute: (POST, "/api/chat")
+}
+
+api relayhouseChatOptions {
+  fn: import { relayhouseChatOptions } from "@src/relayhouse/widgetApi",
+  httpRoute: (OPTIONS, "/api/chat")
+}
 //#endregion
 
 //#region File Upload
